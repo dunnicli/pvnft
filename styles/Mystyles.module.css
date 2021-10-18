@@ -1,0 +1,30 @@
+a:link {
+  text-decoration: none;
+  color: blue;
+}
+
+a:visited {
+  color: blue;
+}
+
+a:hover {
+  color: blue;
+}
+
+a.pagelink:link {
+  color: #3366ff;
+  text-decoration: none;
+}
+a.pagelink:visited {
+  color: #3366ff;
+  text-decoration: none;
+}
+a.pagelink:active {
+  color: #3366ff;
+  text-decoration: none;
+}
+
+a.pagelink:hover {
+  color: #006699;
+  text-decoration: underline;
+}

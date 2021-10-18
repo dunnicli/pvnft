@@ -1,0 +1,13 @@
+node_modules
+# Keep environment variables out of version control
+.env
+.next
+prisma/dev.db
+.secret
+.infuraid
+note1.txt
+notes.txt
+
+#Hardhat files
+cache
+artifacts

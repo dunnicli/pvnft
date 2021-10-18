@@ -1,0 +1,8 @@
+Contract Notes:
+Add - deleted, 
+
+Add local db table with more details
+Maybe price is set in local db?
+Add converter to show USD
+
+Details:  Blockchain Name, link to json, link to image, 

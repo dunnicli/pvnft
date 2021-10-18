@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  h1 {
+    @apply text-2xl;
+    @apply font-black;
+  }
+  h2 {
+    @apply text-xl;
+    @apply font-black;
+  }
+  h3 {
+    @apply text-lg;
+  }
+}
+
+.main {
+  margin: 3rem auto;
+  width: 90%;
+  max-width: 40rem;
+}
+
+.main a {
+  color: #0070f3;
+  text-decoration: none;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: #0070f3;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+a:link {
+  color: red;
+}
+
+/* visited link */
+a:visited {
+  color: green;
+}
+
+/* mouse over link */
+a:hover {
+  color: hotpink;
+}
+
+/* selected link */
+a:active {
+  color: blue;
+}
+
+mycolors {
+  color: red;
+}
