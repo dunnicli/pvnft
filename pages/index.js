@@ -2,6 +2,7 @@ import { signIn, signOut, useSession } from "next-auth/client";
 import Image from "next/image";
 import shelter from "../public/images/shelter-river.png";
 import splogo from "../public/images/spca-pv1.gif";
+import Link from "next/link";
 
 export default function Page() {
   const [session, loading] = useSession();
@@ -22,10 +23,10 @@ export default function Page() {
             </div>
             <p>&nbsp;</p>
             <ul className="flex sm:flex-col overflow-hidden content-center justify-between">
-              <li>NFTs</li>
-              <li>Users</li>
-              <li>Notes</li>
-              <li>About SPCAPV</li>
+              <Link href="/market">NFTs For Sale</Link>
+              <Link href="/market/create-item">Create NFT</Link>
+              <Link href="/market/my-assets">My Assets</Link>
+              <Link href="/market/creator-dashboard">Dashboard</Link>
             </ul>
           </div>
         </div>

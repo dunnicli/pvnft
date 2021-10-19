@@ -51,27 +51,25 @@ export default function MyAssets() {
     setNfts(items);
     setLoadingState("loaded");
   }
-  if (loadingState === "loaded" && !nfts.length)
-    return (
-      <div>
-        <div className="page-nav p-4">
-          <Link href="/market">For Sale</Link> -
-          <Link href="/market/create-item">Create Item</Link> -
-          <Link href="/market/my-assets">My Assets</Link> -
-          <Link href="/market/creator-dashboard">Dashboard</Link>
-        </div>
-        <h1 className="px-20 py-10 text-3xl">No Assets Owned</h1>
-      </div>
-    );
+  if (loadingState === "loaded" && !nfts.length) return;
+  <div>
+    <div className="page-nav p-4">
+      <Link href="/market">For Sale</Link> -
+      <Link href="/market/create-item">Create Item</Link> -
+      <Link href="/market/my-assets">My Assets</Link> -
+      <Link href="/market/creator-dashboard">Dashboard</Link>
+    </div>
+    ;<h1 className="px-20 py-10 text-3xl">No Assets Owned</h1>
+  </div>;
   return (
-    <div className="flex p-4">
-      <div className="page-nav">
+    <div>
+      <div className="p-4 page-nav">
         <Link href="/market">For Sale</Link> -
         <Link href="/market/create-item">Create Item</Link> -
         <Link href="/market/my-assets">My Assets</Link> -
         <Link href="/market/creator-dashboard">Dashboard</Link>
       </div>
-      <div>
+      <div className="p-4">
         <p>&nbsp;</p>
         <h1>My Assets</h1>
         <p>&nbsp;</p>

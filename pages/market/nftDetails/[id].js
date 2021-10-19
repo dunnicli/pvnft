@@ -59,11 +59,33 @@ export default function NftDetails() {
 
   return (
     <div className="flex flex-col min-h-screen">
+      <div className="page-nav p-4">
+        <Link href="/market">For Sale</Link> -
+        <Link href="/market/create-item">Create Item</Link> -
+        <Link href="/market/my-assets">My Assets</Link> -
+        <Link href="/market/creator-dashboard">Dashboard</Link>
+      </div>
       <main className="main">
-        <p>NFT ID: {mymeta.tokenId}</p>
-        <p>description: {mymeta.description}</p>
+        <h1>NFT ERC-721 Token ID: {mymeta.tokenId}</h1>
+        <div className="border shadow rounded-xl overflow-hidden">
+          <a
+            target="_blank"
+            href={`${mymeta.image}`}
+            alt="Open image in a new tab"
+            title="Open image in a new tab"
+            rel="noopener noreferrer"
+          >
+            <img src={mymeta.image} className="rounded" />
+          </a>
+          <div className="p-4 bg-black">
+            <p className="text-2xl font-bold text-white">
+              Description - {mymeta.description} Eth
+            </p>
+          </div>
+        </div>
         <p>&nbsp;</p>
-        <p>Token ID: {mymeta.tokenId}</p>
+        <hr />
+        <p>&nbsp;</p>
         <p>
           <a
             target="_blank"
@@ -75,18 +97,20 @@ export default function NftDetails() {
           </a>
         </p>
 
-        <p>Token Contract: {mymeta.tcaddress}</p>
         <p>
           <a
             target="_blank"
-            href={`${mymeta.image}`}
-            alt="Open image in a new tab"
-            title="Open image in a new tab"
             rel="noopener noreferrer"
+            title="Open link in a new tab"
+            href={`https://ropsten.etherscan.io/address/${mymeta.tcaddress}`}
           >
-            <img src={mymeta.image} className="rounded" />
+            View Contract on Blockchain
           </a>
         </p>
+        <p>Token Contract #: {mymeta.tcaddress}</p>
+        <p>&nbsp;</p>
+        <hr />
+        <p>&nbsp;</p>
         <h2>Todo List</h2>
         <ul>
           <li>For Sale?</li>
