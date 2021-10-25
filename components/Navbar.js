@@ -17,6 +17,11 @@ function Navbar() {
           </li>
         )}
         <li>
+          <Link href="/manager">
+            <a>Manager</a>
+          </Link>
+        </li>
+        <li>
           <Link href="/market">
             <a>NFT Market</a>
           </Link>

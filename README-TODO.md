@@ -2,6 +2,8 @@
 
 Remember - you can't modify the contract once it's deployed. Use the database for almost everything. The blockchain will just be used to record ownership.
 
+Create a manager section
+
 Create a new section - nfts
 
 Old market section will be used by admin.
