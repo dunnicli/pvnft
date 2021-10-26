@@ -52,6 +52,8 @@ model User {
   updatedAt     DateTime  @default(now()) @map(name: "updated_at")
   username  String? @unique
   password  String?
+  contracts  Contract[]
+  tokens  Token[]
 
   @@map(name: "users")
 }
@@ -73,3 +75,57 @@ model Note {
   notebody   String
   author  String  
 }
+
+model Contract {
+  id        Int     @default(autoincrement()) @id
+  contract_name     String
+  token_type  String
+  address  String
+  token_name  String
+  token_symbol  String
+  network  String
+  scan_url  String
+  owner_address  String
+  owner_user   User @relation(fields: [owner_id], references: [id])
+  owner_id  Int // relation scalar field  (used in the `@relation` attribute above)
+  description  String?
+  notes  String?
+  created_at     DateTime  @default(now())
+  created_by  Int
+  updated_at     DateTime?  @default(now())
+  updated_by  Int?
+  deleted  Boolean?
+  tokens Token[]
+
+  @@map(name: "contracts")
+}
+
+model Token {
+  id        Int     @default(autoincrement()) @id
+  contract   Contract @relation(fields: [contract_id], references: [id])
+  contract_id  Int // relation scalar field  (used in the `@relation` attribute above)
+  token_id  Int
+  token_symbol  String  //from contract
+  token_name     String  //from contract
+  token_type  String  //from contract
+  contract_scan_url String  //from contract
+  meta_name  String?
+  meta_description  String?
+  meta_image_url  String
+  token_json_uri  String
+  network_name  String
+  owner_address  String
+  owner_user   User @relation(fields: [owner_id], references: [id])
+  owner_id  Int // relation scalar field  (used in the `@relation` attribute above)
+  notes  String?
+  display  Boolean?
+  for_sale  Boolean?
+  sale_price  Float?
+  created_at     DateTime  @default(now())
+  created_by  Int
+  updated_at     DateTime?  @default(now())
+  updated_by  Int?
+  deleted  Boolean?
+
+  @@map(name: "tokens")
+} 
