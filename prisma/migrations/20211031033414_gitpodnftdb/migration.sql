@@ -1,0 +1,50 @@
+-- CreateTable
+CREATE TABLE "contracts" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "contractName" TEXT NOT NULL,
+    "tokenType" TEXT NOT NULL,
+    "address" TEXT NOT NULL,
+    "tokenName" TEXT NOT NULL,
+    "tokenSymbol" TEXT NOT NULL,
+    "network" TEXT NOT NULL,
+    "scanUrl" TEXT NOT NULL,
+    "ownerAddress" TEXT NOT NULL,
+    "ownerId" INTEGER NOT NULL,
+    "description" TEXT,
+    "notes" TEXT,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "createdBy" INTEGER NOT NULL,
+    "updatedAt" DATETIME DEFAULT CURRENT_TIMESTAMP,
+    "updatedBy" INTEGER,
+    "deleted" BOOLEAN,
+    CONSTRAINT "contracts_ownerId_fkey" FOREIGN KEY ("ownerId") REFERENCES "users" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+-- CreateTable
+CREATE TABLE "tokens" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "contractId" INTEGER NOT NULL,
+    "tokenId" INTEGER NOT NULL,
+    "tokenSymbol" TEXT NOT NULL,
+    "tokenName" TEXT NOT NULL,
+    "tokenType" TEXT NOT NULL,
+    "contractScanUrl" TEXT NOT NULL,
+    "metaName" TEXT,
+    "metaDescription" TEXT,
+    "metaImageUrl" TEXT NOT NULL,
+    "tokenJsonUri" TEXT NOT NULL,
+    "networkName" TEXT NOT NULL,
+    "ownerAddress" TEXT NOT NULL,
+    "ownerId" INTEGER NOT NULL,
+    "notes" TEXT,
+    "display" BOOLEAN,
+    "forSale" BOOLEAN,
+    "salePrice" REAL,
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "createdBy" INTEGER NOT NULL,
+    "updatedAt" DATETIME DEFAULT CURRENT_TIMESTAMP,
+    "updatedBy" INTEGER,
+    "deleted" BOOLEAN,
+    CONSTRAINT "tokens_contractId_fkey" FOREIGN KEY ("contractId") REFERENCES "contracts" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT "tokens_ownerId_fkey" FOREIGN KEY ("ownerId") REFERENCES "users" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
+);
