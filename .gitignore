@@ -9,5 +9,5 @@ note1.txt
 notes.txt
 
 #Hardhat files
-#cache
-#artifacts
+cache
+artifacts
