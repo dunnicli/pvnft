@@ -1,3 +1,10 @@
+tasks:
+  - init: npm install
+    command: npx hardhat compile
+  - name:  Initialize prisma client  
+    command: npx prisma migrate
+
+
 Contract Notes:
 Add - deleted, 
 
