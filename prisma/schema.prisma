@@ -78,22 +78,22 @@ model Note {
 
 model Contract {
   id        Int     @default(autoincrement()) @id
-  contract_name     String
-  token_type  String
+  contractName     String
+  tokenType  String
   address  String
-  token_name  String
-  token_symbol  String
+  tokenName  String
+  tokenSymbol  String
   network  String
-  scan_url  String
-  owner_address  String
-  owner_user   User @relation(fields: [owner_id], references: [id])
-  owner_id  Int // relation scalar field  (used in the `@relation` attribute above)
+  scanUrl  String
+  ownerAddress  String
+  ownerUser   User @relation(fields: [ownerId], references: [id])
+  ownerId  Int // relation scalar field  (used in the `@relation` attribute above)
   description  String?
   notes  String?
-  created_at     DateTime  @default(now())
-  created_by  Int
-  updated_at     DateTime?  @default(now())
-  updated_by  Int?
+  createdAt     DateTime  @default(now())
+  createdBy  Int
+  updatedAt     DateTime?  @default(now())
+  updatedBy  Int?
   deleted  Boolean?
   tokens Token[]
 
@@ -102,29 +102,29 @@ model Contract {
 
 model Token {
   id        Int     @default(autoincrement()) @id
-  contract   Contract @relation(fields: [contract_id], references: [id])
-  contract_id  Int // relation scalar field  (used in the `@relation` attribute above)
-  token_id  Int
-  token_symbol  String  //from contract
-  token_name     String  //from contract
-  token_type  String  //from contract
-  contract_scan_url String  //from contract
-  meta_name  String?
-  meta_description  String?
-  meta_image_url  String
-  token_json_uri  String
-  network_name  String
-  owner_address  String
-  owner_user   User @relation(fields: [owner_id], references: [id])
-  owner_id  Int // relation scalar field  (used in the `@relation` attribute above)
+  contract   Contract @relation(fields: [contractId], references: [id])
+  contractId  Int // relation scalar field  (used in the `@relation` attribute above)
+  tokenId  Int
+  tokenSymbol  String  //from contract
+  tokenName     String  //from contract
+  tokenType  String  //from contract
+  contractScanUrl String  //from contract
+  metaName  String?
+  metaDescription  String?
+  metaImageUrl  String
+  tokenJsonUri  String
+  networkName  String
+  ownerAddress  String
+  ownerUser   User @relation(fields: [ownerId], references: [id])
+  ownerId  Int // relation scalar field  (used in the `@relation` attribute above)
   notes  String?
   display  Boolean?
-  for_sale  Boolean?
-  sale_price  Float?
-  created_at     DateTime  @default(now())
-  created_by  Int
-  updated_at     DateTime?  @default(now())
-  updated_by  Int?
+  forSale  Boolean?
+  salePrice  Float?
+  createdAt     DateTime  @default(now())
+  createdBy  Int
+  updatedAt     DateTime?  @default(now())
+  updatedBy  Int?
   deleted  Boolean?
 
   @@map(name: "tokens")
