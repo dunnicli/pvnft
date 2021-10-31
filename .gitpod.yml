@@ -2,4 +2,4 @@ tasks:
   - name: Dependencies
     init: |
       npm install
-      npx hardhat compile
+      
