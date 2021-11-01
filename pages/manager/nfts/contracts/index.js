@@ -25,6 +25,9 @@ export default function Page() {
             <p>&nbsp;</p>
             <ul className="flex sm:flex-col overflow-hidden content-center justify-between">
               <Link href="/manager/nfts/contracts">Contracts</Link>
+              <Link href="/manager/nfts/contracts/addContract">
+                Add New Contract
+              </Link>
               <Link href="/manager/nfts/tokens">Tokens</Link>
               <Link href="/manager/nfts/transactions">Transactions</Link>
               <Link href="/manager/nfts/payments">Payments</Link>
