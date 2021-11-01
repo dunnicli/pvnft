@@ -5,6 +5,7 @@ import prisma from "../../../../../lib/prisma.ts";
 // eslint-disable-next-line import/no-anonymous-default-export
 export default async (req, res) => {
   const data = JSON.parse(req.body);
+  const now = new Date();
 
   const createdContract = await prisma.contract.create({
     data: {

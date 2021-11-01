@@ -1,11 +1,12 @@
 import { signIn, signOut, useSession } from "next-auth/client";
 import Image from "next/image";
-//import shelter from "../../../../public/images/shelter-river.png";
 import splogo from "../../../../public/images/spca-pv1.gif";
 import Link from "next/link";
-//import mydog from "../../../../public"
+import prisma from "../../../../lib/prisma.ts";
 
-export default function Page() {
+//og from "../../../../public"
+
+export default function Page({ data }) {
   const [session, loading] = useSession();
 
   return (
@@ -42,6 +43,28 @@ export default function Page() {
           <p>&nbsp;</p>
           <p>Contracts - Add, Edit, Details, Delete</p>
           <p>&nbsp;</p>
+          <h2>Contracts</h2>
+          <ul>
+            {data.map((item) => (
+              <li key="item.id">
+                <b>{item.name}</b>
+                <br />
+                {item.tokenSymbol}
+                <br />
+                <p>ID: {item.id}</p>
+                <div className="page-nav">
+                  <Link
+                    href={`/manager/nfts/contracts/detailsContract/${item.id}`}
+                  >
+                    Details
+                  </Link>
+                </div>
+                <br />
+                &nbsp;
+              </li>
+            ))}
+          </ul>
+          <hr />
           <p className="font-black text-3xl">
             This section will be developed under a new git branch before it is
             released. The branch will be named nftdatabase.
@@ -73,4 +96,12 @@ export default function Page() {
       </footer>
     </div>
   );
+}
+
+export async function getServerSideProps() {
+  const contracts = await prisma.contract.findMany();
+
+  return {
+    props: { data: contracts },
+  };
 }
