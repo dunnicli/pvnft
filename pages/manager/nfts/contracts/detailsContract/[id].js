@@ -17,7 +17,7 @@ export async function getServerSideProps(context) {
 }
 
 async function deleteContract(id) {
-  await fetch(`/api/notes/noteDelete/${id}`, {
+  await fetch(`/api/notess/noteDelete/${id}`, {
     method: "DELETE",
   });
   Router.push("/notes");
@@ -37,12 +37,28 @@ export default function ContractView(props) {
 
       <main className="main">
         <p>Name: {contract.contractName}</p>
+        <p>Token Type: {contract.tokenType}</p>
+        <p>Address: {contract.address}</p>
+        <p>Token Name: {contract.tokenName}</p>
+        <p>Token Symbol: {contract.tokenSymbol}</p>
+        <p>Network: {contract.network}</p>
+        <p>EtherScan Url: {contract.scanUrl}</p>
+        <p>Owner Address: {contract.ownerAddress}</p>
+        <p>User: ??</p>
+        <p>Owner ID: {contract.ownerId}</p>
+        <p>Description: {contract.description}</p>
+        <p>Notes: {contract.notes}</p>
+        <p>Created At: {contract.createdAt.toDateString()}</p>
+        <p>Created By: {contract.createdBy}</p>
+        <p>Updated At: {contract.updatedAt.toDateString()}</p>
+        <p>Updated By: {contract.updatedBy}</p>
+        <p>Deleted?: {contract.deleted}</p>
         <p>&nbsp;</p>
-        Body:
-        <br />
-        <p>{contract.tokenSymbol}</p>
         <div className="page-nav">
-          <Link href={`/notes/editNote/${contract.id}`}>Edit</Link>- &nbsp;
+          <Link href={`/manager/nfts/contracts/editContract/${contract.id}`}>
+            Edit
+          </Link>
+          - &nbsp;
           <button
             className="delete button"
             onClick={() => {
