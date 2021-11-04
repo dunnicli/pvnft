@@ -8,6 +8,11 @@ export async function getServerSideProps(context) {
   const { id } = context.params;
   const contract = await prisma.contract.findUnique({
     where: { id: parseInt(id) },
+    include: {
+      ownerUser: {
+        select: { name: true, id: true, email: true },
+      },
+    },
   });
   return {
     props: {
@@ -36,23 +41,73 @@ export default function ContractView(props) {
       </Head>
 
       <main className="main">
-        <p>Name: {contract.contractName}</p>
-        <p>Token Type: {contract.tokenType}</p>
-        <p>Address: {contract.address}</p>
-        <p>Token Name: {contract.tokenName}</p>
-        <p>Token Symbol: {contract.tokenSymbol}</p>
-        <p>Network: {contract.network}</p>
-        <p>EtherScan Url: {contract.scanUrl}</p>
-        <p>Owner Address: {contract.ownerAddress}</p>
-        <p>User: ??</p>
-        <p>Owner ID: {contract.ownerId}</p>
-        <p>Description: {contract.description}</p>
-        <p>Notes: {contract.notes}</p>
-        <p>Created At: {contract.createdAt.toDateString()}</p>
-        <p>Created By: {contract.createdBy}</p>
-        <p>Updated At: {contract.updatedAt.toDateString()}</p>
-        <p>Updated By: {contract.updatedBy}</p>
-        <p>Deleted?: {contract.deleted}</p>
+        <h1>{contract.contractName}</h1>
+        <p>&nbsp;</p>
+        <p>&nbsp;</p>
+        <p>
+          Name:&nbsp; &nbsp; <b>{contract.contractName}</b>
+        </p>
+        <p>
+          Token Type:&nbsp; &nbsp; <b>{contract.tokenType}</b>
+        </p>
+        <p>
+          Address:&nbsp; &nbsp; <b>{contract.address}</b>
+        </p>
+        <p>
+          Token Name:&nbsp; &nbsp; <b>{contract.tokenName}</b>
+        </p>
+        <p>
+          Token Symbol:&nbsp; &nbsp; <b>{contract.tokenSymbol}</b>
+        </p>
+        <p>
+          Network:&nbsp; &nbsp; <b>{contract.network}</b>
+        </p>
+        <p>
+          Etherscan:&nbsp; &nbsp;
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Open link in a new tab"
+            href={`${contract.scanUrl}`}
+          >
+            View Contract on Blockchain
+          </a>
+        </p>
+
+        <p>
+          Contract Owner Address:&nbsp; &nbsp; <b>{contract.ownerAddress}</b>
+        </p>
+        <p>
+          User:&nbsp; &nbsp;{" "}
+          <b>
+            {contract?.ownerUser?.name}&nbsp; &nbsp;
+            {contract?.ownerUser?.email}
+          </b>
+        </p>
+        <p>
+          Contract Owner User ID:&nbsp; &nbsp; <b>{contract.ownerId}</b>
+        </p>
+        <p>
+          Description:&nbsp; &nbsp; <b>{contract.description}</b>
+        </p>
+        <p>
+          Notes:&nbsp; &nbsp; <b>{contract.notes}</b>
+        </p>
+        <p>
+          Created At:&nbsp; &nbsp; <b>{contract.createdAt.toLocaleString()}</b>
+        </p>
+        <p>
+          Created By:&nbsp; &nbsp; <b>{contract.createdBy}</b>
+        </p>
+        <p>
+          Updated At:&nbsp; &nbsp; <b>{contract.updatedAt.toLocaleString()}</b>
+        </p>
+        <p>
+          Updated By:&nbsp; &nbsp; <b>{contract.updatedBy}</b>
+        </p>
+        <p>
+          Deleted?:&nbsp; &nbsp; <b>{contract.deleted}</b>
+        </p>
         <p>&nbsp;</p>
         <div className="page-nav">
           <Link href={`/manager/nfts/contracts/editContract/${contract.id}`}>
@@ -72,6 +127,11 @@ export default function ContractView(props) {
           >
             Delete
           </button>
+          <p>
+            <Link href="/manager/nfts/contracts">
+              <a>Back to Contracts</a>
+            </Link>
+          </p>
         </div>
       </main>
       <footer className="text-center font-bold text-xl">
