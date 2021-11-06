@@ -127,6 +127,11 @@ export default function ContractView(props) {
           >
             Delete
           </button>
+          <p>&nbsp;</p>
+          <Link href={`/manager/nfts/tokens/addToken/${contract.id}`}>
+            <a>Add New Token</a>
+          </Link>
+          <p>&nbsp;</p>
           <p>
             <Link href="/manager/nfts/contracts">
               <a>Back to Contracts</a>
