@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Router from "next/router";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/client";
@@ -8,20 +8,68 @@ import { useSession } from "next-auth/client";
 // SET BOOLEAN AND HIDDEN FIELDS
 // import contract id from query
 
-export default function AddToken() {
+export default function NewToken() {
+  const formRef = useRef();
+  const [disable, setDisable] = useState(false);
   const [session] = useSession();
-  const [formData, setFormData] = useState({});
   const router = useRouter();
-  const contractId = router.query.contractid;
+  const thecontractId = router.query.newcontractid;
 
-  async function saveToken(e) {
-    e.preventDefault();
-    const response = await fetch("/api/manager/nfts/tokens/addtoken", {
+  async function editToken() {
+    setDisable(true);
+    const {
+      //editContractId,
+      editTokenId,
+      editMetaName,
+      editMetaDescription,
+      editMetaImageUrl,
+      editTokenJsonUri,
+      editOwnerAddress,
+      editOwnerId,
+      editNotes,
+      editDisplay,
+      editForSale,
+      editSalePrice,
+    } = formRef.current;
+    const contractId = parseInt(thecontractId);
+    const createdBy = parseInt(session.user.uid);
+    const tokenId = editTokenId.value;
+    const metaName = editMetaName.value;
+    const metaDescription = editMetaDescription.value;
+    const metaImageUrl = editMetaImageUrl.value;
+    const tokenJsonUri = editTokenJsonUri.value;
+    const ownerAddress = editOwnerAddress.value;
+    const ownerId = editOwnerId.value;
+    const notes = editNotes.value;
+    const display = editDisplay.value;
+    const forSale = editForSale.value;
+    const salePrice = editSalePrice.value;
+
+    //const id = parseInt(contract.id);
+
+    //
+    let formData = {
+      contractId,
+      createdBy,
+      tokenId,
+      metaName,
+      metaDescription,
+      metaImageUrl,
+      tokenJsonUri,
+      ownerAddress,
+      ownerId,
+      notes,
+      display,
+      forSale,
+      salePrice,
+    };
+
+    await fetch(`/api/manager/nfts/tokens/addtoken`, {
       method: "POST",
       body: JSON.stringify(formData),
     });
-
-    return await response.json(), await Router.push("/manager/nfts/tokens");
+    setDisable(false);
+    Router.push("/manager/nfts/tokens");
   }
 
   return (
@@ -34,12 +82,12 @@ export default function AddToken() {
       <main className="main">
         <p>&nbsp;</p>
         <div className="page-nav">
-          <h3>New Token</h3>
+          <h1>Add New Token</h1>
         </div>
 
         <form
+          ref={formRef}
           className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
-          onSubmit={saveToken}
         >
           <p>
             <b>Token ID Int* on Network</b>
@@ -48,26 +96,17 @@ export default function AddToken() {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="text"
               placeholder="Token ID"
-              name="tokenId"
-              onChange={(e) =>
-                setFormData({ ...formData, tokenId: e.target.value })
-              }
+              defaultValue=""
+              name="editTokenId"
+              required
             />
           </p>
+          <p>&nbsp;</p>
           <p>
-            <b>Contract ID Int* DB</b>
+            <b>Contract ID Int* DB -- </b>
             <br />
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              defaultValue={contractId}
-              name="contractId"
-              onChange={(e) =>
-                setFormData({ ...formData, contractId: e.target.value })
-              }
-            />
           </p>
-
+          <p>&nbsp;</p>
           <p>
             <b>Meta Name *</b>
             <br />
@@ -75,12 +114,11 @@ export default function AddToken() {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="text"
               placeholder="Token Type - ie EC721"
-              name="metaName"
-              onChange={(e) =>
-                setFormData({ ...formData, metaName: e.target.value })
-              }
+              name="editMetaName"
+              defaultValue=""
             />
           </p>
+          <p>&nbsp;</p>
           <p>
             <b>Meta Description *</b>
             <br />
@@ -88,12 +126,11 @@ export default function AddToken() {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="text"
               placeholder="Meta Description"
-              name="metaDescription"
-              onChange={(e) =>
-                setFormData({ ...formData, metaDescription: e.target.value })
-              }
+              name="editMetaDescription"
+              defaultValue=""
             />
           </p>
+          <p>&nbsp;</p>
           <p>
             <b>Meta Image URL *</b>
             <br />
@@ -101,12 +138,11 @@ export default function AddToken() {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="text"
               placeholder="Meta Image URL"
-              name="metaImageUrl"
-              onChange={(e) =>
-                setFormData({ ...formData, metaImageUrl: e.target.value })
-              }
+              name="editMetaImageUrl"
+              defaultValue=""
             />
           </p>
+          <p>&nbsp;</p>
           <p>
             <b>Token JSON URI *</b>
             <br />
@@ -114,12 +150,11 @@ export default function AddToken() {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="text"
               placeholder="Token JSON URI"
-              name="tokenJsonUri"
-              onChange={(e) =>
-                setFormData({ ...formData, tokenJsonUri: e.target.value })
-              }
+              name="editTokenJsonUri"
+              defaultValue=""
             />
           </p>
+          <p>&nbsp;</p>
           <p>
             <b>Owner Wallet Address *</b>
             <br />
@@ -127,12 +162,11 @@ export default function AddToken() {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="text"
               placeholder="Owner Wallet Address"
-              name="ownerAddress"
-              onChange={(e) =>
-                setFormData({ ...formData, ownerAddress: e.target.value })
-              }
+              name="editOwnerAddress"
+              defaultValue=""
             />
           </p>
+          <p>&nbsp;</p>
           <p>
             <b>Owner User ID - DB *</b>
             <br />
@@ -140,12 +174,11 @@ export default function AddToken() {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="text"
               placeholder="Owner User ID - DB"
-              name="ownerId"
-              onChange={(e) =>
-                setFormData({ ...formData, ownerId: e.target.value })
-              }
+              name="editOwnerId"
+              defaultValue=""
             />
           </p>
+          <p>&nbsp;</p>
           <p>
             <b>Notes</b>
             <br />
@@ -153,38 +186,59 @@ export default function AddToken() {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="text"
               placeholder="Notes"
-              name="notes"
-              onChange={(e) =>
-                setFormData({ ...formData, notes: e.target.value })
-              }
+              name="editNotes"
+              defaultValue=""
             />
+          </p>
+          <p>&nbsp;</p>
+          <b>Display Token in Collections?</b>
+          <br />
+          <p>
+            <input
+              type="radio"
+              className="form-radio"
+              name="editDisplay"
+              defaultValue="true"
+              id="displaytrue"
+            />
+            <label htmlFor="yes">Yes!</label>
           </p>
           <p>
-            <b>Display ?</b>
-            <br />
             <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              placeholder="Display in Collections?"
-              name="display"
-              onChange={(e) =>
-                setFormData({ ...formData, display: e.target.value })
-              }
+              type="radio"
+              className="form-radio"
+              name="editDisplay"
+              defaultValue="false"
+              id="displayfalse"
             />
+            <label htmlFor="no">No</label>
+          </p>
+          <p>&nbsp;</p>
+
+          <b>List Token For Sale?</b>
+          <br />
+          <p>
+            <input
+              type="radio"
+              className="form-radio"
+              name="editForSale"
+              defaultValue="true"
+              id="saletrue"
+            />
+            <label htmlFor="yes">Yes!</label>
           </p>
           <p>
-            <b>For Sale?</b>
-            <br />
             <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              placeholder="List For Sale?"
-              name="forSale"
-              onChange={(e) =>
-                setFormData({ ...formData, forSale: e.target.value })
-              }
+              type="radio"
+              className="form-radio"
+              name="editForSale"
+              defaultValue="false"
+              id="displayfalse"
             />
+            <label htmlFor="no">No</label>
           </p>
+
+          <p>&nbsp;</p>
           <p>
             <b>Selling Price - in ETH</b>
             <br />
@@ -192,31 +246,22 @@ export default function AddToken() {
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               type="text"
               placeholder="Selling Price - in ETH"
-              name="salePrice"
-              onChange={(e) =>
-                setFormData({ ...formData, salePrice: e.target.value })
-              }
+              name="editSalePrice"
+              defaultValue=""
             />
           </p>
+          <p>&nbsp;</p>
           <p>
-            <b>Created By - Int DB *</b>
+            <b>Created By - Int DB * --</b>
             <br />
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              defaultValue={session.user.uid}
-              name="createdBy"
-              onChange={(e) =>
-                setFormData({ ...formData, createdBy: e.target.value })
-              }
-            />
           </p>
 
           <p>&nbsp;</p>
           <p>
             <button
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="submit"
+              disabled={disable}
+              onClick={() => editToken()}
             >
               Add New Token
             </button>
