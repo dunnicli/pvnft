@@ -57,9 +57,7 @@ export default function Page({ data }) {
                 <p>DB ID: {item.id}</p>
                 <p>For Sale: {item.forSale}</p>
                 <div className="page-nav">
-                  <Link
-                    href={`/manager/nfts/contracts/detailsContract/${item.id}`}
-                  >
+                  <Link href={`/manager/nfts/tokens/detailsToken/${item.id}`}>
                     Details
                   </Link>
                 </div>
