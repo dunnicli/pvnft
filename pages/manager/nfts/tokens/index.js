@@ -4,6 +4,7 @@ import Image from "next/image";
 import splogo from "../../../../public/images/spca-pv1.gif";
 import Link from "next/link";
 import Head from "next/head";
+import prisma from "../../../../lib/prisma.ts";
 //import mydog from "../../../../public"
 
 export default function Page({ data }) {
