@@ -46,6 +46,7 @@ export default function CreatorDashboard() {
           owner: i.owner,
           sold: i.sold,
           image: meta.data.image,
+          uri: tokenUri,
         };
         return item;
       })
@@ -89,6 +90,16 @@ export default function CreatorDashboard() {
                 <p className="text-2xl font-bold text-white">
                   Price - {nft.price} Eth
                 </p>
+                <p>
+                  <a
+                    target="_blank"
+                    href={`${nft.uri}`}
+                    title="Open link in a new tab"
+                    rel="noopener noreferrer"
+                  >
+                    View JSON
+                  </a>
+                </p>
               </div>
             </div>
           ))}
@@ -108,6 +119,16 @@ export default function CreatorDashboard() {
                   <div className="p-4 bg-black">
                     <p className="text-2xl font-bold text-white">
                       Price - {nft.price} Eth
+                    </p>
+                    <p>
+                      <a
+                        target="_blank"
+                        href={`${nft.uri}`}
+                        title="Open link in a new tab"
+                        rel="noopener noreferrer"
+                      >
+                        View JSON
+                      </a>
                     </p>
                   </div>
                 </div>
