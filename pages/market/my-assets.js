@@ -31,6 +31,7 @@ export default function MyAssets() {
       signer
     );
     const tokenContract = new ethers.Contract(nftaddress, NFT.abi, provider);
+    // Fetch NFTs I have purchased
     const data = await marketContract.fetchMyNFTs();
 
     const items = await Promise.all(
