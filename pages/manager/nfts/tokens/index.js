@@ -46,27 +46,49 @@ export default function Page({ data }) {
           <p>&nbsp;</p>
           <p className="font-black text-4xl">Token Administration</p>
           <p>&nbsp;</p>
-          <p>Tokens - Add, Edit, Details, Delete</p>
           <p>&nbsp;</p>
-          <ul>
-            {data.map((item) => (
-              <li key="item.id">
-                <b>{item.metaName}</b>
-                <br />
-                Token #: {item.tokenId}
-                <br />
-                <p>DB ID: {item.id}</p>
-                <p>For Sale: {item.forSale}</p>
-                <div className="page-nav">
-                  <Link href={`/manager/nfts/tokens/detailsToken/${item.id}`}>
-                    Details
-                  </Link>
+          {data.map((item) => (
+            <div
+              key="item.id"
+              className="max-w-sm w-full lg:max-w-full lg:flex my-5"
+            >
+              <div
+                className="h-48 lg:h-auto lg:w-48 flex-none bg-cover 
+                rounded-t lg:rounded-t-none lg:rounded-l text-center overflow-hidden"
+                style={{
+                  ...(item.metaImageUrl
+                    ? {
+                        backgroundImage: `url(${item.metaImageUrl})`,
+                      }
+                    : {}),
+                }}
+                title="NFT Image"
+              ></div>
+
+              <div className="w-full border-r border-b border-l border-gray-400 lg:border-l-0 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r p-4 flex flex-col justify-between leading-normal">
+                <div className="mb-8">
+                  <p className="text-sm text-gray-600 flex items-center">
+                    Token ID: {item.tokenId}
+                  </p>
+                  <p>&nbsp;</p>
+                  <div className="text-gray-900 font-bold text-xl mb-2">
+                    {item.metaName}
+                  </div>
+                  <p className="text-gray-700 text-base">
+                    {item.metaDescription}
+                  </p>
+                  <p>&nbsp;</p>
+                  <p>For Sale: &nbsp; {item.forSale}</p>
+                  <div className="page-nav">
+                    <Link href={`/manager/nfts/tokens/detailsToken/${item.id}`}>
+                      Details
+                    </Link>
+                  </div>
                 </div>
-                <br />
-                &nbsp;
-              </li>
-            ))}
-          </ul>
+              </div>
+            </div>
+          ))}
+
           <hr />
           <p>&nbsp;</p>
           <p className="font-black text-3xl">
