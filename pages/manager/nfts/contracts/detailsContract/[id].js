@@ -132,6 +132,11 @@ export default function ContractView(props) {
             <a>Add New Token</a>
           </Link>
           <p>&nbsp;</p>
+          <p>&nbsp;</p>
+          <Link href={`/manager/nfts/tokens/createNft/${contract.id}`}>
+            <a>Create New NFT</a>
+          </Link>
+          <p>&nbsp;</p>
           <p>
             <Link href="/manager/nfts/contracts">
               <a>Back to Contracts</a>
