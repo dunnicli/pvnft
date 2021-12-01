@@ -29,6 +29,7 @@ export default function NftDetails() {
     const tokenContract = new ethers.Contract(nftaddress, NFT.abi, provider);
     const mytcAddress = tokenContract.address;
     const myuri = await tokenContract.tokenURI(parseInt(finid)); //fix this
+    //const myuri = await tokenContract.tokenUri;
 
     const meta = await axios.get(myuri);
 

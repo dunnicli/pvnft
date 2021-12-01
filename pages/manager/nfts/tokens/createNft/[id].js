@@ -1,6 +1,7 @@
 /* pages/manager/nfts/tokens/createNft/[id].js */
 
 import { useState } from "react";
+import { useSession } from "next-auth/client";
 import { ethers } from "ethers";
 import { create } from "ipfs-http-client";
 import { useRouter } from "next/router";
@@ -24,8 +25,8 @@ const client = create({
 
 //
 
-import { nftaddress } from "../../../../../config";
-import NFT from "../../../../../artifacts/contracts/NFT.sol/NFT.json";
+import { pvnftaddress } from "../../../../../configpvnft";
+import PVNFT from "../../../../../artifacts/contracts/PVNFT.sol/PVNFT.json";
 
 export default function CreateItem() {
   const [fileUrl, setFileUrl] = useState(null);
@@ -83,8 +84,8 @@ export default function CreateItem() {
     // End of connect MetaMask
 
     /* next, create the item */
-    let contract = new ethers.Contract(nftaddress, NFT.abi, signer);
-    let transaction = await contract.createToken(url);
+    let contract = new ethers.Contract(pvnftaddress, PVNFT.abi, signer);
+    let transaction = await contract.safeMint(signer.address, url);
     let tx = await transaction.wait();
     let event = tx.events[0];
     let value = event.args[2];

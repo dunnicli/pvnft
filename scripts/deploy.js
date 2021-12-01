@@ -12,9 +12,15 @@ async function main() {
   await nft.deployed();
   console.log("nft deployed to:", nft.address);
 
+  const NFT1 = await hre.ethers.getContractFactory("NFT1");
+  const nft1 = await NFT1.deploy();
+  await nft1.deployed();
+  console.log("nft1 deployed to:", nft1.address);
+
   let config = `
   export const nftmarketaddress = "${nftMarket.address}"
   export const nftaddress = "${nft.address}"
+  export const nft1address = "${nft1.address}"
   `;
 
   let data = JSON.stringify(config);

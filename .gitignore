@@ -6,6 +6,7 @@ prisma/dev.db
 prisma/dev.db-journal
 
 .secret
+.secret_old
 .infuraid
 note1.txt
 notes.txt
