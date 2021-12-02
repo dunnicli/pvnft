@@ -66,8 +66,9 @@ export default function CreateItem() {
     try {
       const added = await client.add(data);
       const url = `https://ipfs.infura.io/ipfs/${added.path}`;
+      //const description = data.description;
       /* after file is uploaded to IPFS, pass the URL to save it on Polygon */
-      createSale(url, name, description);
+      createSale(url);
     } catch (error) {
       console.log("Error uploading file: ", error);
     }
@@ -76,16 +77,17 @@ export default function CreateItem() {
 
   // Connect MetaMask
 
-  async function createSale(url, name, description) {
+  async function createSale(url) {
     const web3Modal = new Web3Modal();
     const connection = await web3Modal.connect();
     const provider = new ethers.providers.Web3Provider(connection);
     const signer = provider.getSigner();
+    const owner = await signer.getAddress();
     // End of connect MetaMask
 
     /* next, create the item */
     let contract = new ethers.Contract(pvnftaddress, PVNFT.abi, signer);
-    let transaction = await contract.safeMint(signer.address, url);
+    let transaction = await contract.safeMint(owner, url);
     let tx = await transaction.wait();
     let event = tx.events[0];
     let value = event.args[2];
@@ -93,17 +95,14 @@ export default function CreateItem() {
     // End of create the item
 
     // Next add to your database
-    const contractId = parseInt(thecontractId);
-    //const tokenId = parseInt(tokenId);
-    const metaName = name;
-    const metaDescription = description;
+    const contractId = thecontractId;
+    const metaName = formInput.name;
+    const metaDescription = formInput.description;
     const metaImageUrl = fileUrl;
     const tokenJsonUri = url;
-    const ownerAddress = signer.address;
-    const ownerId = parseInt(session.user.uid);
-    const createdBy = parseInt(session.user.uid);
-
-    //const id = parseInt(contract.id);
+    const ownerAddress = owner;
+    const ownerId = session.user.uid;
+    const createdBy = session.user.uid;
 
     //
     let formData = {

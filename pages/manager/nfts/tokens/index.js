@@ -110,7 +110,13 @@ export default function Page({ data }) {
 }
 
 export async function getServerSideProps() {
-  const tokens = await prisma.token.findMany();
+  const tokens = await prisma.token.findMany({
+    orderBy: [
+      {
+        createdAt: "desc",
+      },
+    ],
+  });
 
   return {
     props: { data: tokens },
