@@ -1,17 +1,19 @@
 import Head from "next/head";
 import { useState } from "react";
 import Router from "next/router";
+import { toast, ToastContainer } from "react-nextjs-toast";
 
 export default function NewNote() {
   const [formData, setFormData] = useState({});
 
   async function saveNote(e) {
+    toast.notify(`Note is saving!`);
     e.preventDefault();
     const response = await fetch("/api/notes/newnote", {
       method: "POST",
       body: JSON.stringify(formData),
     });
-
+    toast.remove();
     return await response.json(), await Router.push("/notes");
   }
 
@@ -28,10 +30,7 @@ export default function NewNote() {
           <h3>New Note</h3>
         </div>
 
-        <form
-          className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
-          onSubmit={saveNote}
-        >
+        <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
           <p>
             <b>Title</b>
             <br />
@@ -74,10 +73,11 @@ export default function NewNote() {
             />
           </p>
           <p>&nbsp;</p>
+          <ToastContainer />
           <p>
             <button
-              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="submit"
+              onClick={saveNote}
+              className="font-bold mt-4 bg-pink-500 text-white rounded p-4 shadow-lg"
             >
               Add Note
             </button>

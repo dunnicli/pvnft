@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import Web3Modal from "web3modal";
 import Link from "next/link";
 import Router from "next/router";
+import { toast, ToastContainer } from "react-nextjs-toast";
 
 const projectId = process.env.NEXT_PUBLIC_IPFS_PROJECTID;
 const projectSecret = process.env.NEXT_PUBLIC_IPFS_PROJECTSECRET;
@@ -53,6 +54,15 @@ export default function CreateItem() {
     }
   }
   async function createMarket() {
+    //toast.notify(`Hi, I am a toast!`);
+    toast.notify(
+      "Please wait for the blockchain operations to complete. This might take 30 seconds or more.",
+      {
+        duration: 20,
+        title: "Creating NFT",
+        type: "success",
+      }
+    );
     // Upload the file to IPFS
 
     const { name, description } = formInput;
@@ -152,6 +162,10 @@ export default function CreateItem() {
 
         <input type="file" name="Asset" className="my-4" onChange={onChange} />
         {fileUrl && <img className="rounded mt-4" width="350" src={fileUrl} />}
+
+        <p>&nbsp;</p>
+        <ToastContainer />
+        <br />
         <button
           onClick={createMarket}
           className="font-bold mt-4 bg-pink-500 text-white rounded p-4 shadow-lg"
