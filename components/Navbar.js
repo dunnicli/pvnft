@@ -22,8 +22,8 @@ function Navbar() {
           </Link>
         </li>
         <li>
-          <Link href="/market">
-            <a>NFT Market</a>
+          <Link href="/gallery">
+            <a>NFT Gallery</a>
           </Link>
         </li>
         <li>
