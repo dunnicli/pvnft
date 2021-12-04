@@ -72,6 +72,20 @@ export default function NewNote() {
               }
             />
           </p>
+          <p>
+            <b>Publish</b>
+            <br />
+            <input
+              type="checkbox"
+              className="form-checkbox"
+              name="publish"
+              defaultChecked={false}
+              onChange={(e) =>
+                setFormData({ ...formData, publish: e.target.value })
+              }
+            />
+          </p>
+
           <p>&nbsp;</p>
           <ToastContainer />
           <p>

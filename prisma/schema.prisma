@@ -80,7 +80,8 @@ model Note {
   id        Int     @default(autoincrement()) @id
   title     String
   notebody   String
-  author  String  
+  author  String
+  publish  Boolean?  
 }
 
 model Contract {
