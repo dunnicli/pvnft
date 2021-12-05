@@ -1,8 +1,10 @@
 import Link from "next/link";
 import Head from "next/head";
 import prisma from "../../lib/prisma.ts";
+import { signIn, signOut, useSession } from "next-auth/client";
 
 export default function Gallery({ data }) {
+  const [session, loading] = useSession();
   return (
     <div className="flex flex-col min-h-screen">
       <Head>
@@ -13,12 +15,14 @@ export default function Gallery({ data }) {
 
       <div className="flex p-4">
         <div className="px-4" style={{ maxWidth: "1600px" }}>
-          <div className="page-nav">
-            <Link href="/market">For Sale</Link> -
-            <Link href="/market/create-item">Create Item</Link> -
-            <Link href="/market/my-assets">My Assets</Link> -
-            <Link href="/market/creator-dashboard">Dashboard</Link>
-          </div>
+          {session && session.user.admin && (
+            <div className="page-nav">
+              <Link href="/market">For Sale</Link> -
+              <Link href="/market/create-item">Create Item</Link> -
+              <Link href="/market/my-assets">My Assets</Link> -
+              <Link href="/market/creator-dashboard">Dashboard</Link>
+            </div>
+          )}
           <div>
             <p>&nbsp;</p>
             <h1>NFT Gallery - SPCAPV!</h1>

@@ -38,6 +38,7 @@ export default function User(props) {
         <p>Username: {user.username}</p>
         <p>Created: {user.createdAt.toDateString()}</p>
         <p>Updated: {user.updatedAt.toDateString()}</p>
+        <p>Administrator: {user.admin && "Yes"}</p>
         <p>ID: {user.id}</p>
         <div className="page-nav">
           <Link href={`/users/editUser/${user.id}`}>Edit</Link>- &nbsp;

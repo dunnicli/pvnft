@@ -28,6 +28,7 @@ export default function UsersPage({ data }) {
               Email: {item.email}
               <br />
               <p>Username: {item.username}</p>
+              <p>Admin: {item.admin && "Yes"}</p>
               <p>ID: {item.id}</p>
               <p>Created: {item.createdAt.toDateString()}</p>
               <div className="page-nav">

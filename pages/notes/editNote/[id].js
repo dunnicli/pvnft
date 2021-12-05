@@ -6,6 +6,9 @@ import prisma from "../../../lib/prisma.ts";
 export async function getServerSideProps(context) {
   const { id } = context.params;
   const note = await prisma.note.findUnique({ where: { id: parseInt(id) } });
+  if (note.publish == true) {
+    note.publish = "on";
+  }
   return {
     props: {
       note,
@@ -16,13 +19,14 @@ export async function getServerSideProps(context) {
 export default function EditNote({ note }) {
   const formRef = useRef();
   const [disable, setDisable] = useState(false);
-
   async function editNote() {
     setDisable(true);
-    const { editNoteTitle, editNoteNotebody, editNoteAuthor } = formRef.current;
+    const { editNoteTitle, editNoteNotebody, editNoteAuthor, editNotePublish } =
+      formRef.current;
     const title = editNoteTitle.value;
     const notebody = editNoteNotebody.value;
     const author = editNoteAuthor.value;
+    const publish = editNotePublish.checked;
     const id = parseInt(note.id);
 
     //
@@ -30,20 +34,12 @@ export default function EditNote({ note }) {
       title,
       notebody,
       author,
+      publish,
     };
-
-    // {name:"John Smith",age:30,hobbies:["Programming","Video Games"]}
-    //let miny = JSON.stringify(data);
-
-    //
 
     await fetch(`/api/notes/updatenote/${id}`, {
       method: "PUT",
       body: JSON.stringify(formData),
-      //id: parseInt(id),
-      //title: title,
-      //notebody: notebody,
-      //author: author
     });
     setDisable(false);
     Router.push("/notes");
@@ -108,6 +104,20 @@ export default function EditNote({ note }) {
                 defaultValue={note?.author}
                 name="editNoteAuthor"
                 type="text"
+              />
+              <p>&nbsp;</p>
+            </div>
+            <div className="label">
+              <label>Publish</label>
+              <br />
+            </div>
+            <div>
+              <input
+                className="form-checkbox"
+                defaultChecked={note?.publish}
+                //onClick={(e) => setEditNotePublish(e.target.checked)}
+                name="editNotePublish"
+                type="checkbox"
               />
               <p>&nbsp;</p>
             </div>

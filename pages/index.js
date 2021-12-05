@@ -22,12 +22,14 @@ export default function Page() {
               />
             </div>
             <p>&nbsp;</p>
-            <ul className="flex sm:flex-col overflow-hidden content-center justify-between">
-              <Link href="/market">NFTs For Sale</Link>
-              <Link href="/market/create-item">Create NFT</Link>
-              <Link href="/market/my-assets">My Assets</Link>
-              <Link href="/market/creator-dashboard">Dashboard</Link>
-            </ul>
+            {session && session.user.admin && (
+              <ul className="flex sm:flex-col overflow-hidden content-center justify-between">
+                <Link href="/market">NFTs For Sale</Link>
+                <Link href="/market/create-item">Create NFT</Link>
+                <Link href="/market/my-assets">My Assets</Link>
+                <Link href="/market/creator-dashboard">Dashboard</Link>
+              </ul>
+            )}
           </div>
         </div>
         <main

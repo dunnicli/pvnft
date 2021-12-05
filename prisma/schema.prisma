@@ -59,6 +59,7 @@ model User {
   updatedAt     DateTime  @default(now()) @map(name: "updated_at")
   username  String? @unique
   password  String?
+  admin     Boolean?
   contracts  Contract[]
   tokens  Token[]
 

@@ -12,25 +12,32 @@ function Navbar() {
         {session && (
           <li>
             <Link href="/">
-              <a>{session.user.name}</a>
+              <a>
+                {session.user.name} {session.user.admin && "**"}
+              </a>
             </Link>
           </li>
         )}
-        <li>
-          <Link href="/manager">
-            <a>Manager</a>
-          </Link>
-        </li>
+        {session && session.user.admin && (
+          <li>
+            <Link href="/manager">
+              <a>Manager</a>
+            </Link>
+          </li>
+        )}
         <li>
           <Link href="/gallery">
             <a>NFT Gallery</a>
           </Link>
         </li>
-        <li>
-          <Link href="/users">
-            <a>Users</a>
-          </Link>
-        </li>
+        {session && session.user.admin && (
+          <li>
+            <Link href="/users">
+              <a>Users</a>
+            </Link>
+          </li>
+        )}
+
         <li>
           <Link href="/notes">
             <a>Notes</a>

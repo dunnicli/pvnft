@@ -2,13 +2,14 @@ import Link from "next/link";
 import React from "react";
 import Router from "next/router";
 import Head from "next/head";
-//import { PostProps } from '../../components/Post';
-//import { useSession } from 'next-auth/client';
 import prisma from "../../../lib/prisma.ts";
 
 export async function getServerSideProps(context) {
   const { id } = context.params;
   const note = await prisma.note.findUnique({ where: { id: parseInt(id) } });
+  if (note.publish == true) {
+    note.publish = "true";
+  }
   return {
     props: {
       note,
@@ -41,6 +42,9 @@ export default function Note(props) {
         Body:
         <br />
         <p>{note.notebody}</p>
+        <p>&nbsp;</p>
+        <p>Publish: {note.publish}</p>
+        <p>&nbsp;</p>
         <div className="page-nav">
           <Link href={`/notes/editNote/${note.id}`}>Edit</Link>- &nbsp;
           <button

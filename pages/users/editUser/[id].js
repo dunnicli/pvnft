@@ -6,6 +6,9 @@ import prisma from "../../../lib/prisma.ts";
 export async function getServerSideProps(context) {
   const { id } = context.params;
   const user = await prisma.user.findUnique({ where: { id: parseInt(id) } });
+  if (user.admin == true) {
+    user.admin = "on";
+  }
   return {
     props: {
       user,
@@ -19,21 +22,18 @@ export default function EditUser({ user }) {
 
   async function editUser() {
     setDisable(true);
-    const { editUserName, editUserEmail } = formRef.current;
+    const { editUserName, editUserEmail, editUserAdmin } = formRef.current;
     const name = editUserName.value;
     const email = editUserEmail.value;
+    const admin = editUserAdmin.checked;
     const id = parseInt(user.id);
 
     //
     let formData = {
       name,
       email,
+      admin,
     };
-
-    // {name:"John Smith",age:30,hobbies:["Programming","Video Games"]}
-    //let miny = JSON.stringify(data);
-
-    //
 
     await fetch(`/api/users/updateuser/${id}`, {
       method: "PUT",
@@ -93,6 +93,20 @@ export default function EditUser({ user }) {
                 rows="4"
                 className="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none"
               ></textarea>
+              <p>&nbsp;</p>
+            </div>
+
+            <div className="label">
+              <label>Administrator</label>
+              <br />
+            </div>
+            <div>
+              <input
+                className="form-checkbox"
+                defaultChecked={user?.admin}
+                name="editUserAdmin"
+                type="checkbox"
+              />
               <p>&nbsp;</p>
             </div>
           </form>

@@ -18,12 +18,14 @@ export default NextAuth({
     jwt: async (token, user, account, profile, isNewUser) => {
       if (user) {
         token.uid = user.id;
+        token.admin = user.admin;
       }
       return Promise.resolve(token);
     },
 
     session: async (session, user) => {
       session.user.uid = user.uid;
+      session.user.admin = user.admin;
       return Promise.resolve(session);
     },
   },
