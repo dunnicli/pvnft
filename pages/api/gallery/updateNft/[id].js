@@ -1,4 +1,4 @@
-import prisma from "../../../../../../lib/prisma.ts";
+import prisma from "../../../../lib/prisma.ts";
 
 export default async function handle(req, res) {
   const tokenId = req.query.id;
@@ -16,15 +16,7 @@ export default async function handle(req, res) {
   const token = await prisma.token.update({
     where: { id: +tokenId },
     data: {
-      contractId: +data.contractId,
       updatedBy: +data.updatedBy,
-      tokenId: +data.tokenId,
-      metaName: data.metaName,
-      metaDescription: data.metaDescription,
-      metaImageUrl: data.metaImageUrl,
-      tokenJsonUri: data.tokenJsonUri,
-      ownerAddress: data.ownerAddress,
-      ownerId: +data.ownerId,
       notes: data.notes,
       display: data.display,
       forSale: data.forSale,

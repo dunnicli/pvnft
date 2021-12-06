@@ -31,7 +31,7 @@ export default function Gallery({ data }) {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
             {data.map((nft, i) => (
               <div key={i} className="border shadow rounded-xl overflow-hidden">
-                <Link href={`/market/nftDetails/${nft.tokenId}`}>
+                <Link href={`/gallery/nftDetails/${nft.tokenId}`}>
                   <a>
                     <img src={nft.metaImageUrl} />
                   </a>
@@ -60,8 +60,12 @@ export default function Gallery({ data }) {
                   <Link href={`/gallery/nftDetails/${nft.id}`}>
                     <a>NFT Details</a>
                   </Link>
-                  <p>&nbsp;</p>
-                  <p>&nbsp;</p>
+                  <br />
+                </div>
+                <div className="text-xs">
+                  Display: {nft.display && "Yes"}
+                  <br />
+                  For Sale: {nft.forSale && "Yes"}
                 </div>
               </div>
             ))}

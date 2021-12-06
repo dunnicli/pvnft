@@ -41,8 +41,8 @@ export default function NewToken() {
     const ownerAddress = editOwnerAddress.value;
     const ownerId = editOwnerId.value;
     const notes = editNotes.value;
-    const display = editDisplay.value;
-    const forSale = editForSale.value;
+    const display = editDisplay.checked;
+    const forSale = editForSale.checked;
     const salePrice = editSalePrice.value;
 
     //const id = parseInt(contract.id);
@@ -64,7 +64,7 @@ export default function NewToken() {
       salePrice,
     };
 
-    await fetch(`/api/manager/nfts/tokens/addtoken`, {
+    await fetch(`/api/manager/nfts/tokens/newtoken`, {
       method: "POST",
       body: JSON.stringify(formData),
     });
@@ -100,11 +100,6 @@ export default function NewToken() {
               name="editTokenId"
               required
             />
-          </p>
-          <p>&nbsp;</p>
-          <p>
-            <b>Contract ID Int* DB -- </b>
-            <br />
           </p>
           <p>&nbsp;</p>
           <p>
@@ -191,51 +186,27 @@ export default function NewToken() {
             />
           </p>
           <p>&nbsp;</p>
-          <b>Display Token in Collections?</b>
-          <br />
           <p>
+            <b>Display Token in Collection</b>
+            <br />
             <input
-              type="radio"
-              className="form-radio"
+              type="checkbox"
+              className="form-checkbox"
               name="editDisplay"
-              defaultValue="true"
-              id="displaytrue"
+              defaultChecked={false}
             />
-            <label htmlFor="yes">Yes!</label>
           </p>
-          <p>
-            <input
-              type="radio"
-              className="form-radio"
-              name="editDisplay"
-              defaultValue="false"
-              id="displayfalse"
-            />
-            <label htmlFor="no">No</label>
-          </p>
-          <p>&nbsp;</p>
 
-          <b>List Token For Sale?</b>
-          <br />
+          <p>&nbsp;</p>
           <p>
+            <b>For Sale</b>
+            <br />
             <input
-              type="radio"
-              className="form-radio"
+              type="checkbox"
+              className="form-checkbox"
               name="editForSale"
-              defaultValue="true"
-              id="saletrue"
+              defaultChecked={false}
             />
-            <label htmlFor="yes">Yes!</label>
-          </p>
-          <p>
-            <input
-              type="radio"
-              className="form-radio"
-              name="editForSale"
-              defaultValue="false"
-              id="displayfalse"
-            />
-            <label htmlFor="no">No</label>
           </p>
 
           <p>&nbsp;</p>
@@ -249,11 +220,6 @@ export default function NewToken() {
               name="editSalePrice"
               defaultValue=""
             />
-          </p>
-          <p>&nbsp;</p>
-          <p>
-            <b>Created By - Int DB * --</b>
-            <br />
           </p>
 
           <p>&nbsp;</p>

@@ -89,10 +89,10 @@ export default function TokenView(props) {
             Token ID:&nbsp; &nbsp; <b>{token.tokenId}</b>
           </p>
           <p>
-            Display?:&nbsp; &nbsp; <b>{token.display}</b>
+            Display?:&nbsp; &nbsp; <b>{token.display && "Yes"}</b>
           </p>
           <p>
-            For Sale:&nbsp; &nbsp; <b>{token.forSale}</b>
+            For Sale:&nbsp; &nbsp; <b>{token.forSale && "Yes"}</b>
           </p>
           <p>
             Sale Price:&nbsp; &nbsp; <b>{token.salePrice}</b>

@@ -3,6 +3,7 @@ import React from "react";
 import Router from "next/router";
 import Head from "next/head";
 import prisma from "../../../lib/prisma.ts";
+import { signIn, signOut, useSession } from "next-auth/client";
 
 export async function getServerSideProps(context) {
   const { id } = context.params;
@@ -41,6 +42,7 @@ async function deleteToken(id) {
 }
 
 export default function NftDetails(props) {
+  const [session, loading] = useSession();
   //const router = useRouter();
   const { token } = props;
 
@@ -89,10 +91,10 @@ export default function NftDetails(props) {
             Token ID:&nbsp; &nbsp; <b>{token.tokenId}</b>
           </p>
           <p>
-            Display?:&nbsp; &nbsp; <b>{token.display}</b>
+            Display in Gallery:&nbsp; &nbsp;<b>{token.display && "Yes"}</b>
           </p>
           <p>
-            For Sale:&nbsp; &nbsp; <b>{token.forSale}</b>
+            For Sale:&nbsp; &nbsp; <b>{token.forSale && "Yes"}</b>
           </p>
           <p>
             Sale Price:&nbsp; &nbsp; <b>{token.salePrice}</b>
@@ -177,36 +179,36 @@ export default function NftDetails(props) {
             Deleted?:&nbsp; &nbsp; <b>{token.deleted}</b>
           </p>
           <p>&nbsp;</p>
+
           <div className="page-nav">
-            <Link href={`/manager/nfts/tokens/editToken/${token.id}`}>
-              Edit Token Info
-            </Link>
-            - &nbsp;
-            <button
-              className="delete button"
-              onClick={() => {
-                const confirmBox = window.confirm(
-                  "Do you really want to delete this Token?"
-                );
-                if (confirmBox === true) {
-                  deleteToken(token.id);
-                }
-              }}
-            >
-              Delete
-            </button>
+            {session && session.user.admin && (
+              <Link href={`/gallery/editNft/${token.id}`}>Edit NFT Info</Link>
+            )}
+            &nbsp;
+            {session && session.user.admin && (
+              <button
+                className="delete button"
+                onClick={() => {
+                  const confirmBox = window.confirm(
+                    "Do you really want to delete this Token?"
+                  );
+                  if (confirmBox === true) {
+                    deleteToken(token.id);
+                  }
+                }}
+              >
+                Delete - Not Working
+              </button>
+            )}
             <p>&nbsp;</p>
-            <Link
-              href={`/manager/nfts/contracts/detailsContract/${token.contractId}`}
-            >
-              <a>View Contract</a>
-            </Link>
             <p>&nbsp;</p>
             <p>
               <Link href="/gallery">
                 <a>Back to NFT Gallery</a>
               </Link>
             </p>
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
           </div>
         </div>
       </div>

@@ -30,6 +30,11 @@ function Navbar() {
             <a>NFT Gallery</a>
           </Link>
         </li>
+        <li>
+          <Link href="/gallery">
+            <a>Donate</a>
+          </Link>
+        </li>
         {session && session.user.admin && (
           <li>
             <Link href="/users">

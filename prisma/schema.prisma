@@ -122,8 +122,8 @@ model Token {
   ownerUser   User @relation(fields: [ownerId], references: [id])
   ownerId  Int // relation scalar field  (used in the `@relation` attribute above)
   notes  String?
-  display  String?
-  forSale  String?
+  display  Boolean?
+  forSale  Boolean?
   salePrice  Float?
   createdAt     DateTime  @default(now())
   createdBy  Int

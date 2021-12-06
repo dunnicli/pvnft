@@ -10,6 +10,12 @@ export async function getServerSideProps(context) {
   const token = await prisma.token.findUnique({
     where: { id: parseInt(id) },
   });
+  if (token.display == true) {
+    token.display = "on";
+  }
+  if (token.forSale == true) {
+    token.forSale = "on";
+  }
   return {
     props: {
       token,
@@ -48,8 +54,8 @@ export default function EditToken({ token }) {
     const ownerAddress = editOwnerAddress.value;
     const ownerId = editOwnerId.value;
     const notes = editNotes.value;
-    const display = editDisplay.value;
-    const forSale = editForSale.value;
+    const display = editDisplay.checked;
+    const forSale = editForSale.checked;
     const salePrice = editSalePrice.value;
 
     //
@@ -205,33 +211,31 @@ export default function EditToken({ token }) {
           </p>
 
           <p>&nbsp;</p>
-          <p>
-            <b>Display Token in Collections?</b>
-            <br />
+          <p>&nbsp;</p>
+          <b>Display in NFT Gallery?</b>
+          <br />
+
+          <div>
             <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              placeholder="true or false"
+              className="form-checkbox"
+              defaultChecked={token?.display}
               name="editDisplay"
-              defaultValue={token?.display}
+              type="checkbox"
             />
-          </p>
+            <p>&nbsp;</p>
+          </div>
           <p>&nbsp;</p>
-
-          <p>&nbsp;</p>
-          <p>
-            <b>List Token For Sale?</b>
-            <br />
+          <b>List Token For Sale?</b>
+          <br />
+          <div>
             <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              placeholder="true or false"
+              className="form-checkbox"
+              defaultChecked={token?.forSale}
               name="editForSale"
-              defaultValue={token?.forSale}
+              type="checkbox"
             />
-          </p>
-          <p>&nbsp;</p>
-
+            <p>&nbsp;</p>
+          </div>
           <p>&nbsp;</p>
           <p>
             <b>Selling Price - in ETH</b>

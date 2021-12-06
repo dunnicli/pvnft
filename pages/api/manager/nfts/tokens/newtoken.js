@@ -5,6 +5,14 @@ import prisma from "../../../../../lib/prisma.ts";
 // eslint-disable-next-line import/no-anonymous-default-export
 export default async (req, res) => {
   const data = JSON.parse(req.body);
+
+  if (data.display == "on") {
+    data.display = true;
+  }
+
+  if (data.forSale == "on") {
+    data.forSale = true;
+  }
   const now = new Date();
 
   const createdToken = await prisma.token.create({

@@ -81,7 +81,13 @@ export default function Page({ data }) {
                     {item.metaDescription}
                   </p>
                   <p>&nbsp;</p>
-                  <p>For Sale: &nbsp; {item.forSale}</p>
+                  <p>
+                    Display in Gallery:&nbsp; &nbsp;{" "}
+                    <b>{item.display && "Yes"}</b>
+                  </p>
+                  <p>
+                    For Sale:&nbsp; &nbsp; <b>{item.forSale && "Yes"}</b>
+                  </p>
                   <div className="page-nav">
                     <Link href={`/manager/nfts/tokens/detailsToken/${item.id}`}>
                       Details
