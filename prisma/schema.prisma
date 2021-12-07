@@ -62,6 +62,8 @@ model User {
   admin     Boolean?
   contracts  Contract[]
   tokens  Token[]
+  payments  Payment[]
+  points  Point[]
 
   @@map(name: "users")
 }
@@ -133,3 +135,39 @@ model Token {
 
   @@map(name: "tokens")
 } 
+
+model Payment {
+  id        Int     @default(autoincrement()) @id
+  ownerUser   User @relation(fields: [ownerId], references: [id])
+  ownerId  Int // relation scalar field  (used in the `@relation` attribute above)
+  pmtName String
+  amount  Float
+  currencyType  String
+  methodOfPayment  String
+  notes  String?
+  dateReceived  DateTime  @default(now())
+  createdBy  Int
+  updatedAt DateTime?  @default(now())
+  updatedBy Int?
+
+  points  Point[]
+
+  @@map(name: "payments")
+}
+
+model Point {
+  id        Int     @default(autoincrement()) @id
+  ownerUser   User @relation(fields: [ownerId], references: [id])
+  ownerId  Int // relation scalar field  (used in the `@relation` attribute above)
+  payment   Payment @relation(fields: [paymentId], references: [id])
+  paymentId  Int // relation scalar field  (used in the `@relation` attribute above)
+  amount  Float
+  notes String?
+  dateReceived  DateTime  @default(now())
+  createdBy Int
+  updatedAt DateTime?  @default(now()) 
+  updatedBy Int?
+
+  @@map(name: "points")
+  
+}

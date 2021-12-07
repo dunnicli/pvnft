@@ -31,7 +31,7 @@ export default function Gallery({ data }) {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
             {data.map((nft, i) => (
               <div key={i} className="border shadow rounded-xl overflow-hidden">
-                <Link href={`/gallery/nftDetails/${nft.tokenId}`}>
+                <Link href={`/gallery/nftDetails/${nft.id}`}>
                   <a>
                     <img src={nft.metaImageUrl} />
                   </a>
@@ -77,7 +77,9 @@ export default function Gallery({ data }) {
 }
 
 export async function getServerSideProps() {
-  const nfts = await prisma.token.findMany();
+  const nfts = await prisma.token.findMany({
+    where: { display: true },
+  });
 
   return {
     props: { data: nfts },

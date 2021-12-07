@@ -31,7 +31,7 @@ function Navbar() {
           </Link>
         </li>
         <li>
-          <Link href="/gallery">
+          <Link href="/pay">
             <a>Donate</a>
           </Link>
         </li>
