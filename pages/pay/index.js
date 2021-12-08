@@ -1,24 +1,57 @@
 import Link from "next/link";
 import Head from "next/head";
-import { signIn, signOut, useSession } from "next-auth/client";
+import { useSession } from "next-auth/client";
 import Image from "next/image";
 import splogo from "../../public/images/spca-pv1.gif";
 import { toast, ToastContainer } from "react-nextjs-toast";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Router from "next/router";
 
+// Start nes code
 export default function Pay() {
-  const [session, loading] = useSession();
-  const [formData, setFormData] = useState({});
-  async function savePayment(e) {
+  const formRef = useRef();
+  const [disable, setDisable] = useState(false);
+  const [session] = useSession();
+
+  async function savePayment() {
+    setDisable(true);
+    const {
+      //editContractId,
+      editPmtName,
+      editAmount,
+      editCurrencyType,
+      editMethodOfPayment,
+      editNotes,
+    } = formRef.current;
+
+    const createdBy = parseInt(session.user.uid);
+    const ownerId = parseInt(session.user.uid);
+    const pmtName = editPmtName.value;
+    const amount = editAmount.value;
+    const currencyType = editCurrencyType.value;
+    const methodOfPayment = editMethodOfPayment.value;
+    const notes = editNotes.value;
+
+    //
+    let formData = {
+      createdBy,
+      ownerId,
+      pmtName,
+      amount,
+      currencyType,
+      methodOfPayment,
+      notes,
+    };
+
+    // End new code
+
     toast.notify(`Payment is processing!`);
-    e.preventDefault();
     const response = await fetch("/api/pay/newpayment", {
       method: "POST",
       body: JSON.stringify(formData),
     });
     toast.remove();
-    return await response.json(), await Router.push("/");
+    return await response.json(), await Router.push(`/profile/${ownerId}`);
   }
 
   return (
@@ -55,15 +88,10 @@ export default function Pay() {
           <p>&nbsp;</p>
           <h1>Put Form Here! {session && session.user.uid}</h1>
           <p>&nbsp;</p>
-          <form className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
-            <input
-              type="hidden"
-              name="ownerId"
-              defaultValue="{{session && session.user.uid}}"
-              onChange={(e) =>
-                setFormData({ ...formData, ownerId: e.target.value })
-              }
-            />
+          <form
+            ref={formRef}
+            className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+          >
             <p>
               <b>First and Last Name (for your records)</b>
               <br />
@@ -71,12 +99,12 @@ export default function Pay() {
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 type="text"
                 placeholder="First and Last Name"
-                name="pmtName"
-                onChange={(e) =>
-                  setFormData({ ...formData, pmtName: e.target.value })
-                }
+                defaultValue=""
+                name="editPmtName"
+                required
               />
             </p>
+            <p>&nbsp;</p>
             <p>
               <b>Amount of Donation</b>
               <br />
@@ -84,12 +112,12 @@ export default function Pay() {
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 type="text"
                 placeholder="Amount - i.e. $50.00"
-                name="amount"
-                onChange={(e) =>
-                  setFormData({ ...formData, amount: e.target.value })
-                }
+                defaultValue=""
+                name="editAmount"
+                required
               />
             </p>
+            <p>&nbsp;</p>
             <p>
               <b>Currency Type (i.e. USD, CAD)</b>
               <br />
@@ -97,12 +125,12 @@ export default function Pay() {
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 type="text"
                 placeholder="Currency Type - i.e. USD, CAD"
-                name="currencyType"
-                onChange={(e) =>
-                  setFormData({ ...formData, currencyType: e.target.value })
-                }
+                defaultValue=""
+                name="editCurrencyType"
+                required
               />
             </p>
+            <p>&nbsp;</p>
             <p>
               <b>Method of Payment</b>
               <br />
@@ -110,39 +138,39 @@ export default function Pay() {
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 type="text"
                 placeholder="Method of Payment - i.e. PayPal, Credit Card"
-                name="methodOfPayment"
-                onChange={(e) =>
-                  setFormData({ ...formData, methodOfPayment: e.target.value })
-                }
+                defaultValue=""
+                name="editMethodOfPayment"
+                required
               />
             </p>
+            <p>&nbsp;</p>
             <p>
               <b>Notes</b>
               <br />
               <textarea
                 className="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none"
-                name="notes"
-                id=""
+                name="editNotes"
                 cols="40"
                 rows="5"
                 placeholder="Type your notes about this donation here."
-                onChange={(e) =>
-                  setFormData({ ...formData, notes: e.target.value })
-                }
+                defaultValue=""
               />
             </p>
 
             <p>&nbsp;</p>
             <ToastContainer />
             <p>
+              <p>&nbsp;</p>
               <button
-                onClick={savePayment}
-                className="font-bold mt-4 bg-pink-500 text-white rounded p-4 shadow-lg"
+                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                disabled={disable}
+                onClick={() => savePayment()}
               >
                 Send Payment
               </button>
             </p>
           </form>
+          <p>&nbsp;</p>
           <p>&nbsp;</p>
           <p>
             This is a very simple prototype form we will use to establish the
@@ -150,15 +178,6 @@ export default function Pay() {
             users who have setup their wallets, and more.
           </p>
           <p>&nbsp;</p>
-          <p>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry standard dummy text ever
-            since the 1500s, when an unknown printer took a galley of type and
-            scrambled it to make a type specimen book. It has survived not only
-            five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s
-            with the release
-          </p>
         </div>
       </div>
     </div>

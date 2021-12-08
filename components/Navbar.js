@@ -11,7 +11,7 @@ function Navbar() {
       <ul className={`main-nav ${!session && loading ? "loading" : "loaded"}`}>
         {session && (
           <li>
-            <Link href="/">
+            <Link href={`/profile/${session.user.uid}`}>
               <a>
                 {session.user.name} {session.user.admin && "**"}
               </a>
