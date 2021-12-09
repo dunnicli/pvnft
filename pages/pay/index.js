@@ -50,8 +50,31 @@ export default function Pay() {
       method: "POST",
       body: JSON.stringify(formData),
     });
+
+    const added = await response.json();
+    console.log("JSON reply: ", added);
+    const pmtid = added.id;
+
+    // GET THE PAYMENT ID
+
+    const paymentId = pmtid;
+
+    //
+    let theData = {
+      ownerId,
+      paymentId,
+      amount,
+      notes,
+      createdBy,
+    };
+
+    await fetch(`/api/pay/newpoints`, {
+      method: "POST",
+      body: JSON.stringify(theData),
+    });
+
     toast.remove();
-    return await response.json(), await Router.push(`/profile/${ownerId}`);
+    return await Router.push(`/profile/${ownerId}`);
   }
 
   return (
@@ -83,10 +106,9 @@ export default function Pay() {
 
         <div className="flex-auto w-3/4 p-5 ml-10 mr-10">
           <div className="text-center">
-            <h1>Donate</h1>
+            <h1>Donation Form</h1>
           </div>
           <p>&nbsp;</p>
-          <h1>Put Form Here! {session && session.user.uid}</h1>
           <p>&nbsp;</p>
           <form
             ref={formRef}
