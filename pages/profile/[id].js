@@ -4,6 +4,8 @@ import { useSession } from "next-auth/client";
 import Image from "next/image";
 import splogo from "../../public/images/spca-pv1.gif";
 import prisma from "../../lib/prisma.ts";
+import Points from "../../components/points";
+import { useEffect, useState } from "react";
 
 // Start nes code
 export async function getServerSideProps(context) {
@@ -28,6 +30,19 @@ export async function getServerSideProps(context) {
 export default function ProfileHome({ user }) {
   const [session] = useSession();
 
+  let payResult = user.payments.map(({ amount }) => amount);
+  let pointsResult = user.points.map(({ amount }) => amount);
+
+  const totalPay = payResult.reduce(
+    (previousValue, currentValue, index) => previousValue + currentValue,
+    0
+  );
+
+  const totalPoint = pointsResult.reduce(
+    (previousValue, currentValue, index) => previousValue + currentValue,
+    0
+  );
+
   return (
     <div>
       <Head>
@@ -48,9 +63,19 @@ export default function ProfileHome({ user }) {
             />
           </div>
           <p>&nbsp;</p>
-          <p>NFT Points Available: </p>
+          <p>
+            NFT Points Available:
+            <br />
+            <b>{totalPoint}</b>
+          </p>
+          <p>&nbsp;</p>
+          <p>
+            Donations To Date:
+            <br />
+            <b>${totalPay}</b>
+          </p>
+          <p>&nbsp;</p>
           <p>Dashboard</p>
-          <p>Donations To Date: </p>
           <p>History</p>
           <p>More...</p>
         </div>
