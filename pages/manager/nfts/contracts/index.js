@@ -36,6 +36,7 @@ export default function Page({ data }) {
               <Link href="/manager/nfts/contracts/addContract">
                 Add New Contract
               </Link>
+              <Link href="/manager">Transfer Contract Ownership</Link>
               <Link href="/manager/nfts/tokens">Tokens</Link>
               <Link href="/manager/nfts/transactions">Transactions</Link>
               <Link href="/manager/nfts/payments">Payments</Link>

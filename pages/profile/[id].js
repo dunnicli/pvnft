@@ -4,7 +4,7 @@ import { useSession } from "next-auth/client";
 import Image from "next/image";
 import splogo from "../../public/images/spca-pv1.gif";
 import prisma from "../../lib/prisma.ts";
-import Points from "../../components/points";
+//import Points from "../../components/points";
 import { useEffect, useState } from "react";
 
 // Start nes code
@@ -74,6 +74,14 @@ export default function ProfileHome({ user }) {
             <br />
             <b>${totalPay}</b>
           </p>
+          <p>&nbsp;</p>
+          <div className="page-nav p-2">
+            <Link href="/profile/createNewNft" passHref>
+              <b>
+                <a>Create New NFT!</a>
+              </b>
+            </Link>
+          </div>
           <p>&nbsp;</p>
           <p>Dashboard</p>
           <p>History</p>
