@@ -76,9 +76,17 @@ export default function ProfileHome({ user }) {
           </p>
           <p>&nbsp;</p>
           <div className="page-nav p-2">
+            <Link href="/oz/sendNftOnly" passHref>
+              <b>
+                <a>Send NFT Only</a>
+              </b>
+            </Link>
+          </div>
+          <p>&nbsp;</p>
+          <div className="page-nav p-2">
             <Link href="/profile/createNewNft" passHref>
               <b>
-                <a>Create New NFT!</a>
+                <a> On Hold Create New NFT!</a>
               </b>
             </Link>
           </div>

@@ -1,15 +1,18 @@
 const ABI = [`function safeMint(address to, string uri) public`];
 
-const URI =
-  "https://ipfs.infura.io/ipfs/QmdjktWvjtrqjJdkmbkUokpmQzMZaJnrEVRWBmBUy3TbRi";
+const formdata = JSON.parse(params.request.body);
+
+const URI = formdata.uri;
+const RECIPIENT = formdata.recipient;
+
 const ADDRESS = "0xb56C22a246F39ac92fAFae8EAA82996f00ef5F19";
-const RECIPIENT = "0x69858424642a19eb0C9cb68D8FC8985cF3070045";
 
 const { ethers } = require("ethers");
 const {
   DefenderRelaySigner,
   DefenderRelayProvider,
 } = require("defender-relay-client/lib/ethers");
+const { data } = require("autoprefixer");
 
 /**   Mint an NFT for the recipient */
 
