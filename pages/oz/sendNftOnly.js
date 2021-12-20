@@ -6,6 +6,7 @@ import splogo from "../../public/images/spca-pv1.gif";
 import { toast, ToastContainer } from "react-nextjs-toast";
 import { useState, useRef } from "react";
 import Router from "next/router";
+// const fs = require("fs");
 
 // Start code
 export default function SendNft() {
@@ -46,7 +47,9 @@ export default function SendNft() {
     });
 
     const added = await response.json();
-    console.log("JSON reply: ", added);
+    console.log("JD JSON reply: ", added);
+    //console.log("JD Parsing: ", JSON.parse(added));
+
     //const pmtid = added.id;
 
     // GET THE PAYMENT ID
@@ -125,8 +128,8 @@ export default function SendNft() {
 
             <p>&nbsp;</p>
             <ToastContainer />
+            <p>&nbsp;</p>
             <p>
-              <p>&nbsp;</p>
               <button
                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                 disabled={disable}

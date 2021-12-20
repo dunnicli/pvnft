@@ -91,6 +91,16 @@ export default function ProfileHome({ user }) {
             </Link>
           </div>
           <p>&nbsp;</p>
+          <p>&nbsp;</p>
+          <div className="page-nav p-2">
+            <Link href="/oz/fixjson" passHref>
+              <b>
+                <a> Fix JSON!</a>
+              </b>
+            </Link>
+          </div>
+          <p>&nbsp;</p>
+          <p>&nbsp;</p>
           <p>Dashboard</p>
           <p>History</p>
           <p>More...</p>
