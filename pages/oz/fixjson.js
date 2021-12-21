@@ -4,33 +4,21 @@ import Router from "next/router";
 import Head from "next/head";
 const { ethers } = require("ethers");
 
-import data from "../../data2.json";
-//0x0000000000000000000000000000000000000000000000000000000000000027
-//const flog = Buffer.from(data.encodedLogs, "base64");
-//elog = data.encodedLogs;
+import data from "../../data4.json";
 
-//const dlog = atob(data.encodedLogs);
 const flog = Buffer.from(data.encodedLogs, "base64");
 const fflog = flog.toString();
 
-//const dlog = ethers.utils.base64.decode(data.encodedLogs);
+// 146 and 215
+// should be 148 and 214
+const firstat = fflog.indexOf("@@") + 2;
+const lastat = fflog.lastIndexOf("@@");
 
 // Put @ signs in my console log.
-const tid = fflog.indexOf("@") - 40;
-var res = fflog.substring(148, 214);
-///  use .split to split the string into an array of strings.
-const tlog = fflog.split("@");
-fflog.indexOf("@") && fflog.substr(fflog.lastIndexOf("@") + 1).split(" ")[0];
+var res = fflog.substring(firstat, lastat);
 
 const tokenId = parseInt(res, 16);
 
-// const tokenId = parseInt(tlog, 16);
-// const tokenId = res.toNumber(16);
-
-//const dlog = ethers.utils.defaultAbiCoder.decode(data.encodedLogs);
-
-//base64ToString = JSON.parse(base64ToString);
-//const added = "../../myresponse.json";
 //const added = await response.json();
 //const data = added.data;
 
@@ -50,9 +38,16 @@ export default function MyLog() {
         <div className="flex-auto w-3/4 p-5 border-2 ml-0 mr-10">
           <p>Title: My Log</p>
           <p>&nbsp;</p>
-          Body:
+          Processed Encoded Logs:
           <br />
           <p className="break-words"> {fflog}</p>
+          <p>&nbsp;</p>
+          <p>&nbsp;</p>
+          <p className="break-words">
+            Index of At Signs
+            <br />
+            {firstat}, {lastat}
+          </p>
           <p>&nbsp;</p>
           <p>&nbsp;</p>
           <p className="break-words">SubString: {res}</p>
@@ -61,10 +56,11 @@ export default function MyLog() {
           <p className="break-words">Token ID: {tokenId}</p>
           <p>&nbsp;</p>
           <p>&nbsp;</p>
-          <p className="break-words">TID: {tlog}</p>
-          <p>&nbsp;</p>
-          <p>&nbsp;</p>
-          <p className="break-words">{data.encodedLogs}</p>
+          <p className="break-words">
+            Data.EncodedLogs - Not Processed
+            <br />
+            {data.encodedLogs}
+          </p>
           <p>&nbsp;</p>
           <p>&nbsp;</p>
           <div className="page-nav">

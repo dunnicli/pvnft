@@ -47,18 +47,32 @@ export default function SendNft() {
     });
 
     const added = await response.json();
-    console.log("JD JSON reply: ", added);
-    //console.log("JD Parsing: ", JSON.parse(added));
 
-    //const pmtid = added.id;
+    if (added) {
+      console.log("JD JSON reply: ", added);
+
+      const flog = Buffer.from(added.encodedLogs, "base64");
+      const fflog = flog.toString();
+
+      // 146 and 215
+      // should be 148 and 214
+      const firstat = fflog.indexOf("@@") + 2;
+      const lastat = fflog.lastIndexOf("@@");
+
+      // Put @ signs in my console log.
+      var res = fflog.substring(firstat, lastat);
+
+      var tokenId = parseInt(res, 16);
+    } else {
+      var tokenId = 9999;
+    }
 
     // GET THE PAYMENT ID
-
     //const paymentId = pmtid;
 
     // GET THE PAYMENT STATUS
     toast.remove();
-    return await Router.push("/oz/success");
+    return await Router.push(`/oz/success/${tokenId}`);
   }
 
   return (

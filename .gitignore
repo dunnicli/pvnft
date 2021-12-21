@@ -7,6 +7,9 @@ prisma/dev.db-journal
 
 data.json
 data2.json
+data3.json
+data4.json
+
 
 .secret
 .secret_old
