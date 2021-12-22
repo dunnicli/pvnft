@@ -5,17 +5,9 @@ import { useSession } from "next-auth/client";
 import { ethers } from "ethers";
 import { create } from "ipfs-http-client";
 import { useRouter } from "next/router";
-//import Web3Modal from "web3modal";
 import Link from "next/link";
 import Router from "next/router";
 import { toast, ToastContainer } from "react-nextjs-toast";
-import {
-  DefenderRelayProvider,
-  DefenderRelaySigner,
-} from "defender-relay-client";
-
-const ozApiKey = process.env.API_KEY;
-const ozApiSecret = process.env.API_SECRET;
 
 const projectId = process.env.NEXT_PUBLIC_IPFS_PROJECTID;
 const projectSecret = process.env.NEXT_PUBLIC_IPFS_PROJECTSECRET;
@@ -31,12 +23,7 @@ const client = create({
   },
 });
 
-//
-
-import { spcapvaddress } from "../../configspcapv";
-import SPCAPV from "../../artifacts/contracts/Spcapv.sol/SPCAPV.json";
-
-export default function CreateItem() {
+export default function CreateNft() {
   const [fileUrl, setFileUrl] = useState(null);
   const [session] = useSession();
   const router = useRouter();
@@ -60,16 +47,8 @@ export default function CreateItem() {
       console.log("Error uploading file: ", error);
     }
   }
-  async function createMarket() {
-    //toast.notify(`Hi, I am a toast!`);
-    toast.notify(
-      "Please wait for the blockchain operations to complete. This might take 30 seconds or more.",
-      {
-        duration: 20,
-        title: "Creating NFT",
-        type: "success",
-      }
-    );
+
+  async function sendIpfs() {
     // Upload the file to IPFS
 
     const { name, description } = formInput;
@@ -85,21 +64,69 @@ export default function CreateItem() {
       const url = `https://ipfs.infura.io/ipfs/${added.path}`;
       //const description = data.description;
       /* after file is uploaded to IPFS, pass the URL to save it on Polygon */
-      createSale(url);
+      sendRelay(url);
     } catch (error) {
       console.log("Error uploading file: ", error);
     }
   }
   // End of upload to IPFS
 
-  // Connect MetaMask
+  // Start Autotask with Relay - no MetaMask required
 
-  async function createSale(url) {
-    //const web3Modal = new Web3Modal();
-    //const connection = await web3Modal.connect();
-    //const provider = new ethers.providers.Web3Provider(connection);
-    //const signer = provider.getSigner();
+  async function sendRelay(url, recipient) {
+    const webhook = process.env.NEXT_PUBLIC_AUTOTASK1;
 
+    async function saveNft() {
+      setDisable(true);
+      const { editUri, editRecipient } = formRef.current;
+
+      const uri = editUri.value;
+      const recipient = editRecipient.value;
+
+      //
+      let formData = {
+        uri,
+        recipient,
+      };
+
+      // End new code
+
+      const response = await fetch(webhook, {
+        method: "POST",
+        body: JSON.stringify(formData),
+        headers: { "Content-Type": "application/json" },
+      });
+
+      const added = await response.json();
+
+      if (added) {
+        console.log("JD JSON reply: ", added);
+
+        const flog = Buffer.from(added.encodedLogs, "base64");
+        const fflog = flog.toString();
+
+        // 146 and 215
+        // should be 148 and 214
+        const firstat = fflog.indexOf("@@") + 2;
+        const lastat = fflog.lastIndexOf("@@");
+
+        // Put @ signs in my console log.
+        var res = fflog.substring(firstat, lastat);
+
+        var tokenId = parseInt(res, 16);
+      } else {
+        var tokenId = 9999;
+      }
+
+      // GET THE PAYMENT ID
+      //const paymentId = pmtid;
+
+      // GET THE PAYMENT STATUS
+      toast.remove();
+      return await Router.push(`/oz/success/${tokenId}`);
+    }
+
+    ////////////////////
     const credentials = { apiKey: ozApiKey, apiSecret: ozApiSecret };
     const provider = new DefenderRelayProvider(credentials);
     const signer = new DefenderRelaySigner(credentials, provider, {
@@ -181,7 +208,7 @@ export default function CreateItem() {
         <ToastContainer />
         <br />
         <button
-          onClick={createMarket}
+          onClick={createNft}
           className="font-bold mt-4 bg-pink-500 text-white rounded p-4 shadow-lg"
         >
           Create NFT
