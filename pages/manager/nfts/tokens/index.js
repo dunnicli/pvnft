@@ -48,7 +48,7 @@ export default function Page({ data }) {
           <p>&nbsp;</p>
           {data.map((item) => (
             <div
-              key="item.id"
+              key={item.id}
               className="max-w-sm w-full lg:max-w-full lg:flex my-5"
             >
               <Link href={`/manager/nfts/tokens/detailsToken/${item.id}`}>

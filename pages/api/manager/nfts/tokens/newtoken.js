@@ -17,7 +17,7 @@ export default async (req, res) => {
 
   const createdToken = await prisma.token.create({
     data: {
-      contractId: parseInt(data.contractId),
+      contractId: +data.contractId,
       tokenId: +data.tokenId,
       metaName: data.metaName,
       metaDescription: data.metaDescription,
@@ -30,7 +30,7 @@ export default async (req, res) => {
       forSale: data.forSale,
       salePrice: Number(data.salePrice),
       createdAt: now,
-      createdBy: parseInt(data.createdBy),
+      createdBy: +data.createdBy,
     },
   });
 

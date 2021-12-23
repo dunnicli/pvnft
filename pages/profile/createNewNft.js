@@ -2,9 +2,10 @@
 
 import { useState } from "react";
 import { useSession } from "next-auth/client";
-import { ethers } from "ethers";
+//import { ethers } from "ethers";
 import { create } from "ipfs-http-client";
 import { useRouter } from "next/router";
+//import Web3Modal from "web3modal";
 import Link from "next/link";
 import Router from "next/router";
 import { toast, ToastContainer } from "react-nextjs-toast";
@@ -23,11 +24,13 @@ const client = create({
   },
 });
 
-export default function CreateNft() {
+//
+
+export default function CreateItem() {
   const [fileUrl, setFileUrl] = useState(null);
   const [session] = useSession();
   const router = useRouter();
-  const thecontractId = process.env.RELAY_CONTRACT_ID;
+  const thecontractId = 4;
 
   const [formInput, updateFormInput] = useState({
     //price: "",
@@ -47,8 +50,16 @@ export default function CreateNft() {
       console.log("Error uploading file: ", error);
     }
   }
-
-  async function sendIpfs() {
+  async function createMarket() {
+    //toast.notify(`Hi, I am a toast!`);
+    toast.notify(
+      "Please wait for the blockchain operations to complete. This might take up to 2 minutes or more.",
+      {
+        duration: 20,
+        title: "Creating NFT",
+        type: "success",
+      }
+    );
     // Upload the file to IPFS
 
     const { name, description } = formInput;
@@ -64,86 +75,73 @@ export default function CreateNft() {
       const url = `https://ipfs.infura.io/ipfs/${added.path}`;
       //const description = data.description;
       /* after file is uploaded to IPFS, pass the URL to save it on Polygon */
-      sendRelay(url);
+      createSale(url);
     } catch (error) {
       console.log("Error uploading file: ", error);
     }
   }
   // End of upload to IPFS
 
-  // Start Autotask with Relay - no MetaMask required
+  // Connect MetaMask
 
-  async function sendRelay(url, recipient) {
+  async function createSale(url) {
+    // Relay and Autotask Here
+    // _________________________________________
+    // _________________________________________
+    // _________________________________________
+
     const webhook = process.env.NEXT_PUBLIC_AUTOTASK1;
+    const uri = url;
+    const recipient = "0x69858424642a19eb0c9cb68d8fc8985cf3070045";
 
-    async function saveNft() {
-      setDisable(true);
-      const { editUri, editRecipient } = formRef.current;
+    //
+    let relayFormData = {
+      uri,
+      recipient,
+    };
 
-      const uri = editUri.value;
-      const recipient = editRecipient.value;
+    // End new code
 
-      //
-      let formData = {
-        uri,
-        recipient,
-      };
+    const response = await fetch(webhook, {
+      method: "POST",
+      body: JSON.stringify(relayFormData),
+      headers: { "Content-Type": "application/json" },
+    });
 
-      // End new code
+    const added = await response.json();
 
-      const response = await fetch(webhook, {
-        method: "POST",
-        body: JSON.stringify(formData),
-        headers: { "Content-Type": "application/json" },
-      });
+    if (added) {
+      console.log("JD JSON reply: ", added);
 
-      const added = await response.json();
+      const flog = Buffer.from(added.encodedLogs, "base64");
+      const fflog = flog.toString();
 
-      if (added) {
-        console.log("JD JSON reply: ", added);
+      // 146 and 215
+      // should be 148 and 214
+      const firstat = fflog.indexOf("@@") + 2;
+      const lastat = fflog.lastIndexOf("@@");
 
-        const flog = Buffer.from(added.encodedLogs, "base64");
-        const fflog = flog.toString();
+      // Put @ signs in my console log.
+      var res = fflog.substring(firstat, lastat);
 
-        // 146 and 215
-        // should be 148 and 214
-        const firstat = fflog.indexOf("@@") + 2;
-        const lastat = fflog.lastIndexOf("@@");
-
-        // Put @ signs in my console log.
-        var res = fflog.substring(firstat, lastat);
-
-        var tokenId = parseInt(res, 16);
-      } else {
-        var tokenId = 9999;
-      }
-
-      // GET THE PAYMENT ID
-      //const paymentId = pmtid;
-
-      // GET THE PAYMENT STATUS
-      toast.remove();
-      return await Router.push(`/oz/success/${tokenId}`);
+      var tokenId = parseInt(res, 16);
+    } else {
+      var tokenId = 9999;
     }
 
-    ////////////////////
-    const credentials = { apiKey: ozApiKey, apiSecret: ozApiSecret };
-    const provider = new DefenderRelayProvider(credentials);
-    const signer = new DefenderRelaySigner(credentials, provider, {
-      speed: "fast",
-    });
-    const owner = await signer.getAddress();
+    // GET THE PAYMENT ID
+    //const paymentId = pmtid;
 
-    // End of connect MetaMask
+    // GET THE PAYMENT STATUS
 
-    /* next, create the item */
-    let contract = new ethers.Contract(spcapvaddress, SPCAPV.abi, signer);
-    let transaction = await contract.safeMint(owner, url);
-    let tx = await transaction.wait();
-    let event = tx.events[0];
-    let value = event.args[2];
-    let tokenId = value.toNumber();
-    // End of create the item
+    // _________________________________________
+    // _________________________________________
+    // _________________________________________
+
+    // End Relay and Autotask Here
+    // _________________________________________
+    // _________________________________________
+    // _________________________________________
 
     // Next add to your database
     const contractId = thecontractId;
@@ -151,7 +149,7 @@ export default function CreateNft() {
     const metaDescription = formInput.description;
     const metaImageUrl = fileUrl;
     const tokenJsonUri = url;
-    const ownerAddress = owner;
+    const ownerAddress = recipient;
     const ownerId = session.user.uid;
     const createdBy = session.user.uid;
 
@@ -168,12 +166,13 @@ export default function CreateNft() {
       ownerId,
     };
 
-    await fetch(`/api/manager/nfts/tokens/addtoken`, {
+    await fetch(`/api/manager/nfts/tokens/newtoken`, {
       method: "POST",
       body: JSON.stringify(formData),
     });
     //setDisable(false);
-    Router.push(`/profile/${ownerId}`);
+    toast.remove();
+    Router.push(`/oz/success/${tokenId}`);
   }
 
   return (
@@ -208,7 +207,7 @@ export default function CreateNft() {
         <ToastContainer />
         <br />
         <button
-          onClick={createNft}
+          onClick={createMarket}
           className="font-bold mt-4 bg-pink-500 text-white rounded p-4 shadow-lg"
         >
           Create NFT
