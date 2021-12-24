@@ -47,7 +47,11 @@ export default function CreateItem() {
       const url = `https://ipfs.infura.io/ipfs/${added.path}`;
       setFileUrl(url);
     } catch (error) {
-      console.log("Error uploading file: ", error);
+      //console.log("Error uploading file: ", error);
+      alert(
+        "Error uploading file - the server might be busy - try to select the file again: ",
+        error
+      );
     }
   }
   async function createMarket() {
@@ -110,7 +114,7 @@ export default function CreateItem() {
 
     const added = await response.json();
 
-    if (added) {
+    if (added.status == "success") {
       console.log("JD JSON reply: ", added);
 
       const flog = Buffer.from(added.encodedLogs, "base64");
