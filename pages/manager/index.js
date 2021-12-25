@@ -23,11 +23,13 @@ export default function Page() {
               />
             </div>
             <p>&nbsp;</p>
-            <ul className="flex sm:flex-col overflow-hidden content-center justify-between">
-              <Link href="/manager/nfts">Manage NFTs</Link>
-              <Link href="/users">Manage Users</Link>
-              <Link href="/notes">Admin Notes</Link>
-            </ul>
+            {session && session.user.admin && (
+              <ul className="flex sm:flex-col overflow-hidden content-center justify-between">
+                <Link href="/manager/nfts">Manage NFTs</Link>
+                <Link href="/manager/users">Manage Users</Link>
+                <Link href="/manager/notes">Admin Notes</Link>
+              </ul>
+            )}
           </div>
         </div>
         <main

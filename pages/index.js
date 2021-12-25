@@ -36,10 +36,10 @@ export default function Page() {
           role="main"
           className="w-3/4 mr-10 h-full flex-grow p-3 overflow-auto"
         >
-          <p className="font-black text-4xl">SPCAPV Tienda</p>
+          <p className="font-black text-4xl">PVAR Tienda</p>
           <p>&nbsp;</p>
           <p>
-            NFTs purchased on this official SPCAPV site generate support funding
+            NFTs purchased on this official PVAR site generate support funding
             for our animal rescue operations in Puerto Vallarta, Mexico.
           </p>
 

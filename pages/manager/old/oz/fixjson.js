@@ -4,7 +4,7 @@ import Router from "next/router";
 import Head from "next/head";
 const { ethers } = require("ethers");
 
-import data from "../../data4.json";
+import data from "../../../../data4.json";
 
 const flog = Buffer.from(data.encodedLogs, "base64");
 const fflog = flog.toString();

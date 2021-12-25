@@ -75,13 +75,15 @@ export default function ProfileHome({ user }) {
             <b>${totalPay}</b>
           </p>
           <p>&nbsp;</p>
-          <div className="page-nav p-2">
-            <Link href="/oz/sendNftOnly" passHref>
-              <b>
-                <a>Send NFT Only</a>
-              </b>
-            </Link>
-          </div>
+          {session && session.user.admin && (
+            <div className="page-nav p-2">
+              <Link href="/manager/old/oz/sendNftOnly" passHref>
+                <b>
+                  <a>Send NFT Only</a>
+                </b>
+              </Link>
+            </div>
+          )}
           <p>&nbsp;</p>
           <div className="page-nav p-2">
             <Link href="/profile/createNewNft" passHref>
@@ -92,13 +94,15 @@ export default function ProfileHome({ user }) {
           </div>
           <p>&nbsp;</p>
           <p>&nbsp;</p>
-          <div className="page-nav p-2">
-            <Link href="/oz/fixjson" passHref>
-              <b>
-                <a> Fix JSON!</a>
-              </b>
-            </Link>
-          </div>
+          {session && session.user.admin && (
+            <div className="page-nav p-2">
+              <Link href="/manager/old/oz/fixjson" passHref>
+                <b>
+                  <a> Fix JSON!</a>
+                </b>
+              </Link>
+            </div>
+          )}
           <p>&nbsp;</p>
           <p>&nbsp;</p>
           <p>Dashboard</p>
@@ -108,7 +112,7 @@ export default function ProfileHome({ user }) {
 
         <div className="flex-auto w-3/4 p-5 ml-10 mr-10">
           <div className="text-center">
-            <h1>Profile: {user.name}!</h1>
+            <h1>DASHBOARD: {user.name}!</h1>
           </div>
           <p>&nbsp;</p>
           <p>&nbsp;</p>

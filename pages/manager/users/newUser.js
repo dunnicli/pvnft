@@ -12,7 +12,7 @@ export default function NewUser() {
       body: JSON.stringify(formData),
     });
 
-    return await response.json(), await Router.push("/users");
+    return await response.json(), await Router.push("/manager/users");
   }
 
   return (

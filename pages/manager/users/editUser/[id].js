@@ -1,7 +1,7 @@
 import { useState, useRef } from "react";
 import Head from "next/head";
 import Router from "next/router";
-import prisma from "../../../lib/prisma.ts";
+import prisma from "../../../../lib/prisma.ts";
 
 export async function getServerSideProps(context) {
   const { id } = context.params;

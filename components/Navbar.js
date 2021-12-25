@@ -6,14 +6,33 @@ function Navbar() {
   return (
     <nav className="header">
       <h1 className="logo">
-        <Link href="/">SPCA PV</Link>
+        <Link href="/">PVAR</Link>
       </h1>
       <ul className={`main-nav ${!session && loading ? "loading" : "loaded"}`}>
         {session && (
           <li>
+            <Link href={`/profile/myCollection/${session.user.uid}`}>
+              <a>My Collection</a>
+            </Link>
+          </li>
+        )}
+
+        <li>
+          <Link href="/gallery">
+            <a>NFT Gallery</a>
+          </Link>
+        </li>
+        <li>
+          <Link href="/pay">
+            <a>Donate</a>
+          </Link>
+        </li>
+
+        {session && (
+          <li>
             <Link href={`/profile/${session.user.uid}`}>
               <a>
-                {session.user.name} {session.user.admin && "**"}
+                Dashboard: {session.user.name} {session.user.admin && "**"}
               </a>
             </Link>
           </li>
@@ -25,29 +44,6 @@ function Navbar() {
             </Link>
           </li>
         )}
-        <li>
-          <Link href="/gallery">
-            <a>NFT Gallery</a>
-          </Link>
-        </li>
-        <li>
-          <Link href="/pay">
-            <a>Donate</a>
-          </Link>
-        </li>
-        {session && session.user.admin && (
-          <li>
-            <Link href="/users">
-              <a>Users</a>
-            </Link>
-          </li>
-        )}
-
-        <li>
-          <Link href="/notes">
-            <a>Notes</a>
-          </Link>
-        </li>
 
         <li> &nbsp;</li>
 
