@@ -4,6 +4,7 @@ import { useSession } from "next-auth/client";
 import Image from "next/image";
 import splogo from "../../public/images/spca-pv1.gif";
 import prisma from "../../lib/prisma.ts";
+import pvarlogo from "../../public/images/pvar2.gif";
 //import Points from "../../components/points";
 import { useEffect, useState } from "react";
 
@@ -56,10 +57,10 @@ export default function ProfileHome({ user }) {
           <div className="mt-1">
             <Image
               className="rounded-lg"
-              src={splogo}
+              src={pvarlogo}
               alt="logo"
-              width={150}
-              height={127}
+              width={270}
+              height={231}
             />
           </div>
           <p>&nbsp;</p>

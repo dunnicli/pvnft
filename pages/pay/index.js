@@ -6,6 +6,7 @@ import splogo from "../../public/images/spca-pv1.gif";
 import { toast, ToastContainer } from "react-nextjs-toast";
 import { useState, useRef } from "react";
 import Router from "next/router";
+import pvarlogo from "../../public/images/pvar2.gif";
 
 // Start nes code
 export default function Pay() {
@@ -90,10 +91,10 @@ export default function Pay() {
           <div className="mt-1">
             <Image
               className="rounded-lg"
-              src={splogo}
+              src={pvarlogo}
               alt="logo"
-              width={150}
-              height={127}
+              width={270}
+              height={231}
             />
           </div>
           <p>&nbsp;</p>
