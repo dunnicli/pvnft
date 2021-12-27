@@ -46,6 +46,8 @@ export default function Page() {
         >
           <p className="font-black text-4xl">PVAR Tienda</p>
           <p>&nbsp;</p>
+          <Link href="/register">Register</Link>
+          <p>&nbsp;</p>
           <p>
             NFTs purchased on this official PVAR site generate support funding
             for our animal rescue operations in Puerto Vallarta, Mexico.
