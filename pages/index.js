@@ -48,6 +48,13 @@ export default function Page() {
           <p>&nbsp;</p>
           <Link href="/register">Register</Link>
           <p>&nbsp;</p>
+          <p>&nbsp;</p>
+          <Link href="/manager/old/forms/hookform">Hook Form</Link>
+          <p>&nbsp;</p>
+          <p>&nbsp;</p>
+          <Link href="/manager/old/forms/noteform">Note Form</Link>
+          <p>&nbsp;</p>
+
           <p>
             NFTs purchased on this official PVAR site generate support funding
             for our animal rescue operations in Puerto Vallarta, Mexico.

@@ -4,6 +4,10 @@ import ReCAPTCHA from "react-google-recaptcha";
 
 export default function Home() {
   const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [confirmPassword, setConfirmPassword] = React.useState("");
+  const [fullname, setFullname] = React.useState("");
+
   const recaptchaRef = React.createRef();
 
   const handleChange = ({ target: { value } }) => {
@@ -52,14 +56,14 @@ export default function Home() {
   return (
     <div className="container">
       <Head>
-        <title>Recaptcha with Next</title>
+        <title>Register for PVAR</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <div id="feedback-form">
         <p>&nbsp;</p>
         <p>&nbsp;</p>
 
-        <h2>Hello reCAPTCHA</h2>
+        <h2>Register for PVAR</h2>
         <p>&nbsp;</p>
         <p>&nbsp;</p>
 
@@ -74,6 +78,15 @@ export default function Home() {
               sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
               onChange={onReCAPTCHAChange}
             />
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              onChange={handleChange}
+              required
+              type="text"
+              name="fullname"
+              placeholder="Full Name (First and Last)"
+            />
+            <p>&nbsp;</p>
 
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -84,6 +97,25 @@ export default function Home() {
               placeholder="Email"
             />
             <p>&nbsp;</p>
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              onChange={handleChange}
+              required
+              type="password"
+              name="password"
+              placeholder="Password"
+            />
+            <p>&nbsp;</p>
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              onChange={handleChange}
+              required
+              type="password"
+              name="confirmPassword"
+              placeholder="Type Password Again"
+            />
+            <p>&nbsp;</p>
+
             <p>&nbsp;</p>
 
             <button

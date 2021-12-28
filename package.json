@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@hookform/resolvers": "^2.8.5",
     "@nomiclabs/hardhat-ethers": "^2.0.2",
     "@nomiclabs/hardhat-waffle": "^2.0.1",
     "@openzeppelin/contracts": ">=4.3.3",
@@ -27,9 +28,11 @@
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-google-recaptcha": "^2.1.0",
+    "react-hook-form": "^7.22.5",
     "react-nextjs-toast": "^1.2.5",
     "superjson": "^1.7.5",
-    "web3modal": "^1.9.4"
+    "web3modal": "^1.9.4",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "autoprefixer": "^10.3.4",

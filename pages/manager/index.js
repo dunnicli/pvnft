@@ -1,7 +1,8 @@
 import { signIn, signOut, useSession } from "next-auth/client";
 import Image from "next/image";
 //import shelter from "../../public/images/shelter-river.png";
-import splogo from "../../public/images/spca-pv1.gif";
+//import splogo from "../../public/images/spca-pv1.gif";
+import pvarlogo from "../../public/images/pvar2.gif";
 import Link from "next/link";
 //import mydog from "../../public/images/"
 
@@ -16,10 +17,10 @@ export default function Page() {
             <div className="mt-0">
               <Image
                 className="rounded-lg"
-                src={splogo}
+                src={pvarlogo}
                 alt="logo"
-                width={150}
-                height={127}
+                width={270}
+                height={231}
               />
             </div>
             <p>&nbsp;</p>
@@ -60,7 +61,7 @@ export default function Page() {
         </main>
       </div>
       <footer className="bg-yellow-100 mt-auto font-black text-center">
-        The SPCAPV Footer!!
+        The PVAR Footer!!
       </footer>
     </div>
   );
