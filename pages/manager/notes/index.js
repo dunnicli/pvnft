@@ -22,7 +22,7 @@ export default function NotesPage({ data }) {
 
         <ul>
           {data.map((item) => (
-            <li key="item.id">
+            <li key={item.id}>
               <b>{item.title}</b>
               <br />
               {item.notebody}

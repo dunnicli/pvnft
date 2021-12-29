@@ -51,6 +51,8 @@ model Session {
 
 model User {
   id            Int       @id @default(autoincrement())
+  firstName     String?
+  lastName      String?    
   name          String?
   email         String?   @unique
   emailVerified DateTime? @map(name: "email_verified")
