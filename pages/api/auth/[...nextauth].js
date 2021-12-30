@@ -5,6 +5,8 @@ import { PrismaClient } from "@prisma/client";
 
 const prisma = new PrismaClient();
 
+const bcrypt = require("bcryptjs");
+
 export default NextAuth({
   session: { jwt: true },
 
@@ -57,7 +59,8 @@ export default NextAuth({
           },
         });
         //// *****
-        if (user.password === credentials.password) {
+        if (bcrypt.compareSync(credentials.password, user.passwordHash)) {
+          //if (user.password === credentials.password) {
           // Any object returned will be saved in `user` property of the JWT
           return user;
         } else {

@@ -41,7 +41,11 @@ export default function User(props) {
         <p>Administrator: {user.admin && "Yes"}</p>
         <p>ID: {user.id}</p>
         <div className="page-nav">
-          <Link href={`/manager/users/editUser/${user.id}`}>Edit</Link>- &nbsp;
+          <Link href={`/manager/users/editUser/${user.id}`}>Edit</Link> - &nbsp;
+          <Link href={`/manager/users/changePassword/${user.id}`}>
+            Change Password
+          </Link>
+          &nbsp; - &nbsp;
           <button
             className="delete button"
             onClick={() => {

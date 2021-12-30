@@ -45,8 +45,42 @@ export default function NewUser() {
               }
             />
           </p>
+          <p>&nbsp;</p>
+
           <p>
-            <b>Email</b>
+            <b>First Name</b>
+            <br />
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              type="text"
+              placeholder="First Name"
+              name="firstName"
+              required
+              onChange={(e) =>
+                setFormData({ ...formData, firstName: e.target.value })
+              }
+            />
+          </p>
+          <p>&nbsp;</p>
+
+          <p>
+            <b>Last Name</b>
+            <br />
+            <input
+              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+              type="text"
+              placeholder="Last Name"
+              name="lastName"
+              required
+              onChange={(e) =>
+                setFormData({ ...formData, lastName: e.target.value })
+              }
+            />
+          </p>
+          <p>&nbsp;</p>
+
+          <p>
+            <b>Email Address (This is your username)</b>
             <br />
             <textarea
               className="w-full px-3 py-2 text-gray-700 border rounded-lg focus:outline-none"
@@ -55,24 +89,14 @@ export default function NewUser() {
               cols="40"
               rows="1"
               placeholder="Email"
+              required
               onChange={(e) =>
                 setFormData({ ...formData, email: e.target.value })
               }
             />
           </p>
-          <p>
-            <b>Username</b>
-            <br />
-            <input
-              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-              type="text"
-              placeholder="Username"
-              name="username"
-              onChange={(e) =>
-                setFormData({ ...formData, username: e.target.value })
-              }
-            />
-          </p>
+          <p>&nbsp;</p>
+
           <p>
             <b>Password</b>
             <br />
@@ -81,6 +105,7 @@ export default function NewUser() {
               type="password"
               placeholder="Password"
               name="password"
+              required
               onChange={(e) =>
                 setFormData({ ...formData, password: e.target.value })
               }

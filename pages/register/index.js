@@ -29,7 +29,7 @@ export default function Register() {
       method: "POST",
       body: JSON.stringify(data),
     });
-    //alert("SUCCESS!! Please Sign In");
+    alert("SUCCESS!! Please Sign In");
     return await response.json(), await Router.push("/api/auth/signin");
   };
 

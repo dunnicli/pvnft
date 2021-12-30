@@ -17,6 +17,7 @@
     "ansi-regex": ">=5.0.1",
     "axios": "^0.21.4",
     "babel-plugin-superjson-next": "^0.4.1",
+    "bcryptjs": "^2.4.3",
     "chai": "^4.3.4",
     "defender-relay-client": "^1.12.1",
     "ethereum-waffle": "^3.4.0",

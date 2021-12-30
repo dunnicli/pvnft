@@ -22,8 +22,16 @@ export default function EditUser({ user }) {
 
   async function editUser() {
     setDisable(true);
-    const { editUserName, editUserEmail, editUserAdmin } = formRef.current;
+    const {
+      editUserName,
+      editFirstName,
+      editLastName,
+      editUserEmail,
+      editUserAdmin,
+    } = formRef.current;
     const name = editUserName.value;
+    const firstName = editFirstName.value;
+    const lastName = editLastName.value;
     const email = editUserEmail.value;
     const admin = editUserAdmin.checked;
     const id = parseInt(user.id);
@@ -31,6 +39,8 @@ export default function EditUser({ user }) {
     //
     let formData = {
       name,
+      firstName,
+      lastName,
       email,
       admin,
     };
@@ -44,7 +54,7 @@ export default function EditUser({ user }) {
       //author: author
     });
     setDisable(false);
-    Router.push("/users");
+    Router.push("/manager/users");
   }
 
   return (
@@ -76,6 +86,34 @@ export default function EditUser({ user }) {
                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                 defaultValue={user?.name}
                 name="editUserName"
+                type="text"
+              />
+              <p>&nbsp;</p>
+            </div>
+
+            <div className="label">
+              <label>First Name</label>
+              <br />
+            </div>
+            <div>
+              <input
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                defaultValue={user?.firstName}
+                name="editFirstName"
+                type="text"
+              />
+              <p>&nbsp;</p>
+            </div>
+
+            <div className="label">
+              <label>Last Name</label>
+              <br />
+            </div>
+            <div>
+              <input
+                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                defaultValue={user?.lastName}
+                name="editLastName"
                 type="text"
               />
               <p>&nbsp;</p>

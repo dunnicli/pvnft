@@ -51,8 +51,13 @@ export default function UsersPage({ data }) {
 }
 
 export async function getServerSideProps() {
-  const users = await prisma.user.findMany();
-
+  const users = await prisma.user.findMany({
+    orderBy: [
+      {
+        updatedAt: "desc",
+      },
+    ],
+  });
   return {
     props: { data: users },
   };
