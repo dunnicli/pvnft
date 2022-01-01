@@ -3,10 +3,15 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
 import Head from "next/head";
 import Router from "next/router";
+import ReCAPTCHA from "react-google-recaptcha";
+//import useState from "react";
 
 export default Home;
 
 function Home() {
+  function onChange(value) {
+    console.log("Captcha value:", value);
+  }
   // form validation rules
   const validationSchema = Yup.object().shape({
     title: Yup.string().required("Title is required"),
@@ -27,6 +32,7 @@ function Home() {
   }
  */
   //handleSubmit(async (data) => await fetchAPI(data));
+
   const onSubmit = async (data, e) => {
     e.preventDefault();
     const response = await fetch("/api/notes/newnote", {
@@ -95,8 +101,14 @@ function Home() {
               />
               <div className="invalid-feedback">{errors.author?.message}</div>
             </div>
-
-            <div></div>
+            <p>&nbsp;</p>
+            <div>
+              <ReCAPTCHA
+                required
+                sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY_V2}
+                onChange={onChange}
+              />
+            </div>
 
             <p>&nbsp;</p>
             <p>&nbsp;</p>

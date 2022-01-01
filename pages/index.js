@@ -48,11 +48,15 @@ export default function Page() {
           <p>&nbsp;</p>
           <Link href="/register">Register</Link>
           <p>&nbsp;</p>
+          <Link href="/manager/old/forms/workingCaptcha">Captcha Test</Link>
+          <p>&nbsp;</p>
           <p>&nbsp;</p>
           <Link href="/manager/old/forms/hookform">Hook Form</Link>
           <p>&nbsp;</p>
           <p>&nbsp;</p>
-          <Link href="/manager/old/forms/noteform">Note Form</Link>
+          <Link href="/manager/old/forms/noteCaptchaForm">
+            Note Capture Form
+          </Link>
           <p>&nbsp;</p>
 
           <p>

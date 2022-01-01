@@ -48,8 +48,10 @@ export default function Home() {
     } finally {
       // Reset the reCAPTCHA when the request has failed or succeeeded
       // so that it can be executed again if user submits another email.
+
       recaptchaRef.current.reset();
       setEmail("");
+      alert("It passed");
     }
   };
 
@@ -63,7 +65,7 @@ export default function Home() {
         <p>&nbsp;</p>
         <p>&nbsp;</p>
 
-        <h2>Register for PVAR</h2>
+        <h2>Captcha Register for PVAR</h2>
         <p>&nbsp;</p>
         <p>&nbsp;</p>
 
@@ -75,13 +77,12 @@ export default function Home() {
             <ReCAPTCHA
               ref={recaptchaRef}
               size="invisible"
-              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY_V2}
               onChange={onReCAPTCHAChange}
             />
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               onChange={handleChange}
-              required
               type="text"
               name="fullname"
               placeholder="Full Name (First and Last)"
@@ -100,7 +101,6 @@ export default function Home() {
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               onChange={handleChange}
-              required
               type="password"
               name="password"
               placeholder="Password"
@@ -109,7 +109,6 @@ export default function Home() {
             <input
               className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               onChange={handleChange}
-              required
               type="password"
               name="confirmPassword"
               placeholder="Type Password Again"

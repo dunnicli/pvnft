@@ -48,6 +48,7 @@ export default async function handler(req, res) {
         // to your backend
         await sleep();
         // Return 200 if everything is successful
+        console.log("Email registered successfully");
         return res.status(200).send("OK");
       }
 
@@ -55,7 +56,6 @@ export default async function handler(req, res) {
         message: "Unproccesable request, Invalid captcha code",
       });
     } catch (error) {
-      console.log(error);
       return res.status(422).json({ message: "Something went wrong" });
     }
   }
