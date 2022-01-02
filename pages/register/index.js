@@ -29,6 +29,11 @@ export default function Register() {
   const { errors } = formState;
 
   const onSubmit = async (data, e) => {
+    var mycap = grecaptcha.getResponse();
+    if (mycap.length == 0) {
+      alert("You must verify that you are not a robot");
+      return false;
+    }
     e.preventDefault();
     const response = await fetch("/api/register/newRegistration", {
       method: "POST",

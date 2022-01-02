@@ -49,6 +49,14 @@ function Navbar() {
 
         {!loading && !session && (
           <li>
+            <Link href="/register">
+              <a>Register</a>
+            </Link>
+          </li>
+        )}
+
+        {!loading && !session && (
+          <li>
             <Link href="/api/auth/signin">
               <a
                 onClick={(e) => {

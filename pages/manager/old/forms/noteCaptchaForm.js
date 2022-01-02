@@ -24,16 +24,14 @@ function Home() {
   const { register, handleSubmit, reset, formState } = useForm(formOptions);
   const { errors } = formState;
 
-  /**
-  function onSubmit(data) {
-    // display form data on success
-    alert("SUCCESS!! :-)\n\n" + JSON.stringify(data, null, 4));
-    return false;
-  }
- */
-  //handleSubmit(async (data) => await fetchAPI(data));
-
   const onSubmit = async (data, e) => {
+    // verify they clicked the recaptcha
+    var mycap = grecaptcha.getResponse();
+    if (mycap.length == 0) {
+      alert("You must verify that you are not a robot");
+      return false;
+    }
+
     e.preventDefault();
     const response = await fetch("/api/notes/newnote", {
       method: "POST",

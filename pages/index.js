@@ -29,15 +29,6 @@ export default function Page() {
                 height={231}
               />
             </div>
-            <p>&nbsp;</p>
-            {session && session.user.admin && (
-              <ul className="flex sm:flex-col overflow-hidden content-center justify-between">
-                <Link href="/market">NFTs For Sale</Link>
-                <Link href="/market/create-item">Create NFT</Link>
-                <Link href="/market/my-assets">My Assets</Link>
-                <Link href="/market/creator-dashboard">Dashboard</Link>
-              </ul>
-            )}
           </div>
         </div>
         <main
@@ -46,17 +37,6 @@ export default function Page() {
         >
           <p className="font-black text-4xl">PVAR Tienda</p>
           <p>&nbsp;</p>
-          <Link href="/register">Register</Link>
-          <p>&nbsp;</p>
-          <Link href="/manager/old/forms/workingCaptcha">Captcha Test</Link>
-          <p>&nbsp;</p>
-          <p>&nbsp;</p>
-          <Link href="/manager/old/forms/hookform">Hook Form</Link>
-          <p>&nbsp;</p>
-          <p>&nbsp;</p>
-          <Link href="/manager/old/forms/noteCaptchaForm">
-            Note Capture Form
-          </Link>
           <p>&nbsp;</p>
 
           <p>

@@ -29,6 +29,26 @@ export default function Page() {
                 <Link href="/manager/nfts">Manage NFTs</Link>
                 <Link href="/manager/users">Manage Users</Link>
                 <Link href="/manager/notes">Admin Notes</Link>
+                <Link href="/register">Register</Link>
+                <Link href="/manager/old/forms/workingCaptcha">
+                  Captcha Test
+                </Link>
+                <Link href="/manager/old/forms/hookform">Hook Form</Link>
+                <Link href="/manager/old/forms/noteCaptchaForm">
+                  Note Capture Form
+                </Link>
+                <p>&nbsp;</p>
+              </ul>
+            )}
+
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            {session && session.user.admin && (
+              <ul className="flex sm:flex-col overflow-hidden content-center justify-between">
+                <Link href="/market">NFTs For Sale</Link>
+                <Link href="/market/create-item">Create NFT</Link>
+                <Link href="/market/my-assets">My Assets</Link>
+                <Link href="/market/creator-dashboard">Dashboard</Link>
               </ul>
             )}
           </div>
