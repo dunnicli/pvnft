@@ -33,8 +33,8 @@ const client = create({
 
 //
 
-import { spcapvaddress } from "../../configspcapv";
-import SPCAPV from "../../artifacts/contracts/Spcapv.sol/SPCAPV.json";
+import { spcapvaddress } from "../../../../configspcapv";
+import SPCAPV from "../../../../artifacts/contracts/Spcapv.sol/SPCAPV.json";
 
 export default function CreateItem() {
   const [fileUrl, setFileUrl] = useState(null);
