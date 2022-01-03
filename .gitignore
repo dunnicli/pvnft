@@ -19,5 +19,5 @@ notes.txt
 .DS_Store
 #Hardhat files
 cache
-artifacts
+# artifacts
 .DS_Store
