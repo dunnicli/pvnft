@@ -4,8 +4,8 @@ import { ethers, BigNumber } from "ethers";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Web3Modal from "web3modal";
-import { nftaddress } from "../../../config";
-import NFT from "../../../artifacts/contracts/NFT.sol/NFT.json";
+import { nftaddress } from "../../../../../config";
+import NFT from "../../../../../artifacts/contracts/NFT.sol/NFT.json";
 import { useRouter } from "next/router";
 
 export default function NftDetails() {
