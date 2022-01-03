@@ -2,6 +2,8 @@
 
 # By John Dunnicliffe
 
+Deploy to Vercel
+
 My first public project on Github. I have a lot of private projects. I made it public because there is not enough web 3 material out there to help us. It all works as it stands. I'm just starting this project. React is new for me. Expect to see some ugly code. There is a lot more to do.
 
 Project basics already setup:
