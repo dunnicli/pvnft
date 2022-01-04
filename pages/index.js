@@ -30,21 +30,75 @@ export default function Page() {
               />
             </div>
           </div>
+          <div className="ml-5">
+            <h4 className="text-green-900">Start your NFT Collection Today!</h4>
+            <div className="text-sm">
+              <br />
+              <b>Here&apos;s how it works:</b>
+              <p>&nbsp;</p>
+              <ul className="list-disc">
+                <li>
+                  You will need to register on this site (your privacy is
+                  respected - no spam) and donate money or crypto to accumulate
+                  points.
+                  {!session && <Link href="/register"> Register here.</Link>}
+                  <br />
+                  &nbsp;
+                </li>
+                <li>
+                  For each $25.00 USD you donate to PVAR you will receive points
+                  to create 1 NFT.
+                  <br />
+                  &nbsp;
+                </li>
+                <li>
+                  You can create as many NFTs as you like, right here on this
+                  site.
+                  <br />
+                  &nbsp;
+                </li>
+
+                <li>
+                  You can display your NFTs in our gallery for all to see. How
+                  cool is that! The gallery is open to the public. Free.
+                  <br />
+                  &nbsp;
+                </li>
+
+                <li>
+                  You won&apos;t be charged any fees.
+                  <br />
+                  &nbsp;
+                </li>
+                <li>
+                  You don&apos;t need crypto or a wallet to do this.
+                  <br />
+                  &nbsp;
+                </li>
+                <li>
+                  If you have a wallet, we can transfer the NFT to it.
+                  <br />
+                  &nbsp;
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
         <main
           role="main"
           className="w-3/4 mr-10 h-full flex-grow p-3 overflow-auto"
         >
-          <p className="font-black text-4xl">PVAR Tienda</p>
+          <p className="font-black text-4xl">PVAR NFT Tienda</p>
           <p>&nbsp;</p>
           <p>&nbsp;</p>
 
           <p>
             NFTs purchased on this official PVAR site generate support funding
-            for our animal rescue operations in Puerto Vallarta, Mexico.
+            for animal rescue operations in Puerto Vallarta, Mexico.
           </p>
 
           <p>&nbsp;</p>
+
           <div className="p-4">
             <Image
               className="rounded-lg p-4"
@@ -53,19 +107,28 @@ export default function Page() {
               width={600}
               height={270}
             />
+            <div className="text-center text-sm">
+              Devastating damage to the SPCA de PV sanctuary
+              <br /> caused by Hurricane Nora - August 28, 2021.
+            </div>
           </div>
+          <p>&nbsp;</p>
+          <p>&nbsp;</p>
 
-          <p>
-            {" "}
-            This certificate verifies that the blockchain address associated
-            with this file is the owner of the connected NFT. We thank you for
-            your support. If you have any questions about this NFT or require
-            further verification, please contact us at spcapv.asssist@gmail.com.
+          <p className="text-sm">
+            NFTs created on this site will provide verification that the
+            blockchain address associated with this asset is the owner of the
+            connected NFT. We thank you for your support. If you have any
+            questions about NFTs created here or require further verification,
+            please contact us at jtdmexico@gmail.com. We are always happy to
+            help.
           </p>
+          <p>&nbsp;</p>
+          <p>&nbsp;</p>
         </main>
       </div>
-      <footer className="bg-yellow-100 mt-auto font-black text-center">
-        My Footer!!
+      <footer className="bg-white-100 mt-auto font-black text-center">
+        Development Site - PVAR
       </footer>
     </div>
   );
