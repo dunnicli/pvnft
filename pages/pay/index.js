@@ -5,6 +5,7 @@ import Head from "next/head";
 import Router from "next/router";
 import { useSession } from "next-auth/client";
 import { toast, ToastContainer } from "react-nextjs-toast";
+import Link from "next/link";
 
 export default function Register() {
   const [session] = useSession();
@@ -76,8 +77,9 @@ export default function Register() {
 
       <div className="w-full flex flex-col sm:flex-row flex-grow overflow-hidden">
         <div className="sm:w-1/2 md:1/2 w-full flex-shrink flex-grow-0 p-10">
-          <h1>PVAR Donation Form</h1>
-
+          <h1>PVAR Donation Test Form</h1>
+          <p>No money is charged - testing only</p>
+          <p>&nbsp;</p>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div>
               <p>&nbsp;</p>
@@ -211,6 +213,45 @@ export default function Register() {
               </button>
             </div>
           </form>
+        </div>
+
+        <div className="sm:w-1/2 md:1/2 w-full flex-shrink flex-grow-0 p-10">
+          <h1>Three Ways to Donate</h1>
+          <p>&nbsp;</p>
+          <p>&nbsp;</p>
+          <ul>
+            <li>
+              <b>Credit Card</b>
+              <br />
+              We use Stripe to process your credit card payments.
+              <p>&nbsp;</p>
+            </li>
+            <li>
+              <b>PayPal</b>
+              <br />
+              <p>&nbsp;</p>
+            </li>
+            <li>
+              <b>Bitcoin or Ethereum (Cryptocurrency)</b>
+              <br />
+              * Bitcoin will use the Lightning Network to send your payment.
+              <br />
+              * Ethereum will use the Ropsten Test Network to send your payment.
+              <br />
+              * You will need a wallet like MetaMask for Ethereum.
+              <br />
+              * You will need a wallet like Strike for Bitcoin on the Lightning
+              Network.
+              <br />
+              * Ready to go with Crypto?
+              <br />* Click here to donate with Ethereum!
+              <Link href={`/pay/ethDonate/${session.user.uid}`}>
+                * Click here to donate with Ethereum!
+              </Link>
+              <br />
+              <p>&nbsp;</p>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
