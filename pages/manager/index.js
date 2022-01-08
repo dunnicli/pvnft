@@ -30,6 +30,7 @@ export default function Page() {
                 <Link href="/manager/users">Manage Users</Link>
                 <Link href="/manager/notes">Admin Notes</Link>
                 <Link href="/register">Register</Link>
+
                 <Link href="/manager/old/forms/workingCaptcha">
                   Captcha Test
                 </Link>
